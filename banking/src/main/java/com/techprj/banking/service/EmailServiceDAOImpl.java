@@ -16,8 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceDAOImpl {
 	
+	//Send from account details
 	private static final String username="henryopara@gmail.com";
-	private static final String password="Romaoluve1";
+	private static final String password="gqas vncg rquo hvwh";
 	
 	public boolean sendEmail(String emailid, String twoFaCode) throws AddressException, MessagingException {
 		

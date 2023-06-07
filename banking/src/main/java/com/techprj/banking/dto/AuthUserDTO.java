@@ -1,6 +1,9 @@
 package com.techprj.banking.dto;
 
 import java.sql.Time;
+import java.sql.Timestamp;
+
+import org.joda.time.DateTime;
 
 public class AuthUserDTO {
 	
@@ -10,14 +13,14 @@ public class AuthUserDTO {
 	private Boolean isSuperuser;
 	private Boolean isStaff;
 	private Long twoFACode;
-	private Time twoFACodeExpiryTime;
+	private Long twoFACodeExpiryTime;
 	
 	public AuthUserDTO() {
 		super();
 	}
 
 	public AuthUserDTO(Integer idAuthUser, String username, String password, Boolean isSuperuser, Boolean isStaff,
-			Long twoFACode, Time twoFACodeExpiryTime) {
+			Long twoFACode, Long twoFACodeExpiryTime) {
 		super();
 		this.idAuthUser = idAuthUser;
 		this.username = username;
@@ -76,11 +79,11 @@ public class AuthUserDTO {
 		this.twoFACode = twoFACode;
 	}
 
-	public Time getTwoFACodeExpiryTime() {
+	public Long getTwoFACodeExpiryTime() {
 		return twoFACodeExpiryTime;
 	}
 
-	public void setTwoFACodeExpiryTime(Time twoFACodeExpiryTime) {
+	public void setTwoFACodeExpiryTime(Long twoFACodeExpiryTime) {
 		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
 	}
 

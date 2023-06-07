@@ -1,6 +1,7 @@
 package com.techprj.banking.entity;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.joda.time.DateTime;
 
 @Entity
 @Table(name="authentication")
@@ -23,7 +26,7 @@ public class AuthUser {
 	private Boolean isSuperuser;
 	private Boolean isStaff;
 	private Long twoFACode;
-	private Time twoFACodeExpiryTime;	
+	private Long twoFACodeExpiryTime;	
 	@OneToOne(mappedBy = "authUser")
 	private UserProfile userProfile;
 	
@@ -32,7 +35,7 @@ public class AuthUser {
 	}
 
 	public AuthUser(Integer idAuthUser, String username, String password, Boolean isSuperuser, Boolean isStaff,
-			Long twoFACode, Time twoFACodeExpiryTime, UserProfile userProfile) {
+			Long twoFACode, Long twoFACodeExpiryTime, UserProfile userProfile) {
 		super();
 		this.idAuthUser = idAuthUser;
 		this.username = username;
@@ -92,11 +95,11 @@ public class AuthUser {
 		this.twoFACode = twoFACode;
 	}
 
-	public Time getTwoFACodeExpiryTime() {
+	public Long getTwoFACodeExpiryTime() {
 		return twoFACodeExpiryTime;
 	}
 
-	public void setTwoFACodeExpiryTime(Time twoFACodeExpiryTime) {
+	public void setTwoFACodeExpiryTime(Long twoFACodeExpiryTime) {
 		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
 	}
 

@@ -12,9 +12,9 @@ public class DAOService {
 	
 	public void update2FAProperties(String userid, String twofacode) {
 		
-		jdbcTemplate.update("update users set twofacode=?, twofacodeexpiretime=? where id_auth_user=?", new Object[] {
+		jdbcTemplate.update("update authentication set twofacode=?, twofacodeexpirytime=? where id_auth_user=?", new Object[] {
 				
-				twofacode, (System.currentTimeMillis()/1000) + 120, userid
+				twofacode, (System.currentTimeMillis()/1000) + 120L, userid
 				
 		});
 		

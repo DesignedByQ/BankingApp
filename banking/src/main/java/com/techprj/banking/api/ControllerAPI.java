@@ -66,4 +66,16 @@ public class ControllerAPI {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@PutMapping(value="/users/{userid}/codes/{twofacode}", consumes={MediaType.ALL_VALUE})
+	public ResponseEntity<Object> verify(@PathVariable("userid") String userid, @PathVariable("twofacode") String code){
+		
+		boolean isValid = daoService.checkCode(userid, code);
+		
+		if(isValid)
+			return new ResponseEntity<>(HttpStatus.OK);
+		
+		return new ResponseEntity<>(HttpStatus.FORBIDDEN);	
+		
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.techprj.banking.dto;
 
+import java.sql.Time;
+
 public class AuthUserDTO {
 	
 	private Integer idAuthUser;
@@ -8,13 +10,14 @@ public class AuthUserDTO {
 	private Boolean isSuperuser;
 	private Boolean isStaff;
 	private Long twoFACode;
+	private Time twoFACodeExpiryTime;
 	
 	public AuthUserDTO() {
 		super();
 	}
 
 	public AuthUserDTO(Integer idAuthUser, String username, String password, Boolean isSuperuser, Boolean isStaff,
-			Long twoFACode) {
+			Long twoFACode, Time twoFACodeExpiryTime) {
 		super();
 		this.idAuthUser = idAuthUser;
 		this.username = username;
@@ -22,6 +25,7 @@ public class AuthUserDTO {
 		this.isSuperuser = isSuperuser;
 		this.isStaff = isStaff;
 		this.twoFACode = twoFACode;
+		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
 	}
 
 	public Integer getIdAuthUser() {
@@ -72,10 +76,19 @@ public class AuthUserDTO {
 		this.twoFACode = twoFACode;
 	}
 
+	public Time getTwoFACodeExpiryTime() {
+		return twoFACodeExpiryTime;
+	}
+
+	public void setTwoFACodeExpiryTime(Time twoFACodeExpiryTime) {
+		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
+	}
+
 	@Override
 	public String toString() {
 		return "AuthUserDTO [idAuthUser=" + idAuthUser + ", username=" + username + ", password=" + password
-				+ ", isSuperuser=" + isSuperuser + ", isStaff=" + isStaff + ", twoFACode=" + twoFACode + "]";
+				+ ", isSuperuser=" + isSuperuser + ", isStaff=" + isStaff + ", twoFACode=" + twoFACode
+				+ ", twoFACodeExpiryTime=" + twoFACodeExpiryTime + "]";
 	}	
 
 }

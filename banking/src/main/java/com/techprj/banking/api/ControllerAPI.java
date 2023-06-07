@@ -1,32 +1,69 @@
 package com.techprj.banking.api;
 
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.techprj.banking.dto.UserProfileDTO;
+import com.techprj.banking.entity.UserProfile;
+import com.techprj.banking.service.DAOService;
+import com.techprj.banking.service.EmailServiceDAOImpl;
+import com.techprj.banking.service.INTServiceDAOImpl;
+
+import com.techprj.banking.service.SMSServiceDAOImpl;
 
 @RestController
 @RequestMapping("/api")
 @Validated
 public class ControllerAPI {
 
-	//@Autowired
+	@Autowired
+	EmailServiceDAOImpl emailServiceDAOImpl;
+	
+	@Autowired
+	DAOService daoService;
+	
+	@Autowired
+	SMSServiceDAOImpl smsServiceDAOImpl;
+	
+	@Autowired
+	INTServiceDAOImpl intServiceDAOImpl;
+	
+	@PostMapping(value="/adduser", consumes = {MediaType.ALL_VALUE})
+	public ResponseEntity<UserProfileDTO> adduser(@RequestBody UserProfileDTO userProfileDTO) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(intServiceDAOImpl.addUser(userProfileDTO));
+				
+	}
 	
 	@PutMapping(value="/users/{userid}/emails/{emailid}/2fa", consumes={MediaType.ALL_VALUE})
-	public ResponseEntity<Object> send2faCodeinEmail(@PathVariable("userid") String userid, @PathVariable("emailid") String emailid) {
+	public ResponseEntity<Object> send2faCodeinEmail(@PathVariable("userid") String userid, @PathVariable("emailid") String emailid) throws AddressException, MessagingException {
 		
-		
-		return null;
+		String twoFaCode = String.valueOf(new Random().nextInt(9999)+1000);
+		emailServiceDAOImpl.sendEmail(emailid, twoFaCode);
+		daoService.update2FAProperties(userid, twoFaCode);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/users/{userid}/mobilenumbers/{mobilenumber}/2fa", consumes={MediaType.ALL_VALUE})
 	public ResponseEntity<Object> send2faCodeinSMS(@PathVariable("userid") String userid, @PathVariable("mobilenumber") String mobilenumber){
 		
-		
-		return null;
+		String twoFaCode = String.valueOf(new Random().nextInt(9999)+1000);
+		smsServiceDAOImpl.send2FaCode(mobilenumber, twoFaCode);
+		daoService.update2FAProperties(userid, twoFaCode);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 }

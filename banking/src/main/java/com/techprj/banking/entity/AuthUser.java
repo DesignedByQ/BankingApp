@@ -1,5 +1,7 @@
 package com.techprj.banking.entity;
 
+import java.sql.Time;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,7 @@ public class AuthUser {
 	private Boolean isSuperuser;
 	private Boolean isStaff;
 	private Long twoFACode;
+	private Time twoFACodeExpiryTime;	
 	@OneToOne(mappedBy = "authUser")
 	private UserProfile userProfile;
 	
@@ -29,7 +32,7 @@ public class AuthUser {
 	}
 
 	public AuthUser(Integer idAuthUser, String username, String password, Boolean isSuperuser, Boolean isStaff,
-			Long twoFACode) {
+			Long twoFACode, Time twoFACodeExpiryTime, UserProfile userProfile) {
 		super();
 		this.idAuthUser = idAuthUser;
 		this.username = username;
@@ -37,6 +40,8 @@ public class AuthUser {
 		this.isSuperuser = isSuperuser;
 		this.isStaff = isStaff;
 		this.twoFACode = twoFACode;
+		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
+		this.userProfile = userProfile;
 	}
 
 	public Integer getIdAuthUser() {
@@ -87,10 +92,27 @@ public class AuthUser {
 		this.twoFACode = twoFACode;
 	}
 
+	public Time getTwoFACodeExpiryTime() {
+		return twoFACodeExpiryTime;
+	}
+
+	public void setTwoFACodeExpiryTime(Time twoFACodeExpiryTime) {
+		this.twoFACodeExpiryTime = twoFACodeExpiryTime;
+	}
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+
 	@Override
 	public String toString() {
 		return "AuthUser [idAuthUser=" + idAuthUser + ", username=" + username + ", password=" + password
-				+ ", isSuperuser=" + isSuperuser + ", isStaff=" + isStaff + ", twoFACode=" + twoFACode + "]";
+				+ ", isSuperuser=" + isSuperuser + ", isStaff=" + isStaff + ", twoFACode=" + twoFACode
+				+ ", twoFACodeExpiryTime=" + twoFACodeExpiryTime + ", userProfile=" + userProfile + "]";
 	}
-	
+		
 }

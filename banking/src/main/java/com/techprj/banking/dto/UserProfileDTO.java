@@ -1,6 +1,7 @@
 package com.techprj.banking.dto;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class UserProfileDTO {
 	
@@ -11,15 +12,15 @@ public class UserProfileDTO {
 	private String lastName;
 	private Long mobile;
 	private String email;
-	private AddressDTO address;
-	private Date customerSince;
+	private AddressDTO addressDTO;
+	private LocalDate customerSince;
 	
 	public UserProfileDTO() {
 		super();
 	}
 
-	public UserProfileDTO(Long idUserProfile, com.techprj.banking.dto.AuthUserDTO authUserDTO, String firstName,
-			String middleName, String lastName, Long mobile, String email, AddressDTO address, Date customerSince) {
+	public UserProfileDTO(Long idUserProfile, AuthUserDTO authUserDTO, String firstName, String middleName,
+			String lastName, Long mobile, String email, AddressDTO addressDTO, LocalDate customerSince) {
 		super();
 		this.idUserProfile = idUserProfile;
 		this.authUserDTO = authUserDTO;
@@ -28,7 +29,7 @@ public class UserProfileDTO {
 		this.lastName = lastName;
 		this.mobile = mobile;
 		this.email = email;
-		this.address = address;
+		this.addressDTO = addressDTO;
 		this.customerSince = customerSince;
 	}
 
@@ -88,19 +89,19 @@ public class UserProfileDTO {
 		this.email = email;
 	}
 
-	public AddressDTO getAddress() {
-		return address;
+	public AddressDTO getAddressDTO() {
+		return addressDTO;
 	}
 
-	public void setAddress(AddressDTO address) {
-		this.address = address;
+	public void setAddressDTO(AddressDTO addressDTO) {
+		this.addressDTO = addressDTO;
 	}
 
-	public Date getCustomerSince() {
+	public LocalDate getCustomerSince() {
 		return customerSince;
 	}
 
-	public void setCustomerSince(Date customerSince) {
+	public void setCustomerSince(LocalDate customerSince) {
 		this.customerSince = customerSince;
 	}
 
@@ -108,7 +109,7 @@ public class UserProfileDTO {
 	public String toString() {
 		return "UserProfileDTO [idUserProfile=" + idUserProfile + ", authUserDTO=" + authUserDTO + ", firstName="
 				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", mobile=" + mobile
-				+ ", email=" + email + ", address=" + address + ", customerSince=" + customerSince + "]";
+				+ ", email=" + email + ", addressDTO=" + addressDTO + ", customerSince=" + customerSince + "]";
 	}
 	
 }

@@ -45,6 +45,18 @@ public class EmailServiceDAOImpl {
 		
 		return true;
 		
+//		if(session != null) {
+//			
+//			Transport.send(message);
+//			
+//			return true;
+//			
+//		} else {
+//			
+//			return false;
+//			
+//		}
+		
 	}
 
 }

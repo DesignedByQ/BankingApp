@@ -11,11 +11,11 @@ public class DAOService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	public void update2FAProperties(String userid, String twofacode) {
+	public void update2FAProperties(String emailid, String twofacode) {
 		
-		jdbcTemplate.update("update authentication set twofacode=?, twofacodeexpirytime=? where id_auth_user=?", new Object[] {
+		jdbcTemplate.update("update authentication set twofacode=?, twofacodeexpirytime=? " + "where id_auth_user in (select id_user_profile from users where email=?)", new Object[] {
 				
-				twofacode, (System.currentTimeMillis()/1000) + 120L, userid
+				twofacode, (System.currentTimeMillis()/1000) + 120L, emailid
 				
 		});
 		

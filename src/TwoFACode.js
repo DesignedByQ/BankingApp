@@ -28,26 +28,27 @@ function TwoFACode() {
   const email = location.state?.email || ''; 
 
   const url = `http://localhost:8080/api/emails/${email}/codes/${values.code}`;
-
+  
   useEffect(() => {
-    
-    const putRequest = async () => {
-
+   
+    const putRequest = async (email) => {
+      
       setIsLoading(true);
       setIsError(false);
-
+     
       try {
+
         const response = await fetch(url, {
           method: 'PUT'
         });
-
+       
         if (!response.ok) {
           
           setIsError(true);
-          
+         
         } else {
-
-          navigate('/custprofile');
+          //console.log(response.json)
+          navigate('/custprofile', { state: { email: email } } );
 
         }
 
@@ -63,10 +64,10 @@ function TwoFACode() {
     };
 
     if (errors.code === "") {
-      putRequest();
+      putRequest(email);
     }
 
-  }, [errors.code, navigate, url]);
+  }, [email, errors.code, navigate, url]);
 
   return (
     <div className="">

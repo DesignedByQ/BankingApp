@@ -26,6 +26,7 @@ public class AuthUser {
 	private Boolean isSuperuser;
 	private Boolean isStaff;
 	private Long twoFACode;
+	@Column(name = "twoFACodeexpirytime")
 	private Long twoFACodeExpiryTime;	
 	@OneToOne(mappedBy = "authUser")
 	private UserProfile userProfile;

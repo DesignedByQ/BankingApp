@@ -15,17 +15,17 @@ public class DAOService {
 		
 		jdbcTemplate.update("update authentication set twofacode=?, twofacodeexpirytime=? " + "where id_auth_user in (select id_user_profile from users where email=?)", new Object[] {
 				
-				twofacode, (System.currentTimeMillis()/1000) + 120L, emailid
+				twofacode, (System.currentTimeMillis()/1000) + 12000L, emailid
 				
 		});
 		
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean checkCode(String userid, String code) {
+	public boolean checkCode(String emailid, String code) {
 
-		return jdbcTemplate.queryForObject("select count(*) from authentication where twofacode=? and id_auth_user=?" + " and twofacodeexpirytime >=?", new Object[] {
-				code, userid, System.currentTimeMillis()/1000
+		return jdbcTemplate.queryForObject("select count(*) from authentication where twofacode=? and twofacodeexpirytime >=? and id_auth_user in (select id_user_profile from users where email=?)", new Object[] {
+				code, System.currentTimeMillis()/1000, emailid
 		}, Integer.class) >0;
 		
 	}

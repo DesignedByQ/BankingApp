@@ -95,6 +95,7 @@ function Signup() {
     const url = `http://localhost:8081/api/uploadcust`;
 
     const handleSubmit = async (event) => {
+       // console.log(values)
         event.preventDefault();
         setErrors(Validation(values));
         // if(errors.name === "" && errors.email === "" && errors.password === "") {
@@ -105,10 +106,6 @@ function Signup() {
 
             setIsLoading(true);
             setIsError(false);
-
-
-
-            //console.log(values.fileDTO.fileData)
 
             try {
                 //console.log(JSON.stringify(values))
@@ -130,10 +127,11 @@ function Signup() {
                   
                 } else {
 
-                   
+                    const data = await response.json();
+                    console.log(data)
                     //do get req on submitted page
                   // this page should navigate to a details succeffully submitted page. check your emails within the next 24hrs for a decsion on your account
-                  navigate('/twofacode');
+                    navigate('/submitted', { state: { submittedValues: data } });
         
                 }
         
@@ -263,7 +261,7 @@ function Signup() {
                     <input type='file' name='fileDTO.fileData' onChange={handleInput} />
                 </div>
                 
-                <small>File format must be either PDF, JPG, PNG only.</small>
+                <small>File format must be 1MB max and either PDF, JPG, PNG only.</small>
                 
                 </div>
                 <div>

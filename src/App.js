@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Signup from "./Signup";
 import TwoFACode from "./TwoFACode"
 import CustProfile from "./CustProfile";
+import Submitted from "./Submitted";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Route path='/signup' element={<Signup />}></Route>
                 <Route path='/twofacode' element={<TwoFACode />}></Route>
                 <Route path='/custprofile' element={<CustProfile />}></Route>
+                <Route path='/submitted' element={<Submitted />}></Route>
             </Routes>
         </BrowserRouter>
     );

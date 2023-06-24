@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-
-
 function CustProfile() {
   const location = useLocation();
-  const [customer, setCustomer] = useState(null);
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -14,25 +12,53 @@ function CustProfile() {
   //const email = location.state?.email || '';
   const url = `http://localhost:8080/api/getprofile/${email}`;
 
+  const admin_url = `http://localhost:8082/api/getadmin/${email}`;
+
   //console.log(email)
   useEffect(() => {
+
     const getRequest = async () => {
+
       setIsError(false);
 
-      try {
-        const response = await fetch(url, {
-          method: 'GET'
-        });
+      const eml = email.substring(email.length - 13)
 
-        if (!response.ok) {
+      if (!eml === "@infosys.com") {
+
+        try {
+          const response = await fetch(url, {
+            method: 'GET'
+          });
+
+          if (!response.ok) {
+            setIsError(true);
+          } else {
+            const data = await response.json();
+            setUser(data);
+          }
+        } catch (error) {
           setIsError(true);
-        } else {
-          const data = await response.json();
-          setCustomer(data);
+          console.log(error);
         }
-      } catch (error) {
-        setIsError(true);
-        console.log(error);
+
+      } else if (eml === "@infosys.com") {
+
+        try {
+          const response = await fetch(admin_url, {
+            method: 'GET'
+          });
+
+          if (!response.ok) {
+            setIsError(true);
+          } else {
+            const data = await response.json();
+            setUser(data);
+          }
+        } catch (error) {
+          setIsError(true);
+          console.log(error);
+        }
+
       }
 
       setIsLoading(false);
@@ -41,7 +67,7 @@ function CustProfile() {
     if(email){
         getRequest();
     }
-}, [email, url]);
+}, [email, url, admin_url]);
     
 //     // eslint-disable-next-line react-hooks/exhaustive-deps
 //   }, []);
@@ -56,19 +82,19 @@ function CustProfile() {
 
   return (
     <div>
-      {customer && (
+      {user && (
         <div>
-          <h3>Customer Username: {customer.authUserDTO.username}</h3>
-          <h3>First Name: {customer.firstName}</h3>
-          <h3>Middle Name: {customer.middleName}</h3>
-          <h3>Last Name: {customer.lastName}</h3>
-          <h3>Mobile: {customer.mobile}</h3>
-          <h3>Email: {customer.email}</h3>
+          <h3>user Username: {user.authUserDTO.username}</h3>
+          <h3>First Name: {user.firstName}</h3>
+          <h3>Middle Name: {user.middleName}</h3>
+          <h3>Last Name: {user.lastName}</h3>
+          <h3>Mobile: {user.mobile}</h3>
+          <h3>Email: {user.email}</h3>
           <h3>
-            Address: {`${customer.addressDTO.buildingNo}, ${customer.addressDTO.firstLine},
-            ${customer.addressDTO.secondLine}, ${customer.addressDTO.city},
-            ${customer.addressDTO.county}, ${customer.addressDTO.postCode},
-            ${customer.addressDTO.country}`}
+            Address: {`${user.addressDTO.buildingNo}, ${user.addressDTO.firstLine},
+            ${user.addressDTO.secondLine}, ${user.addressDTO.city},
+            ${user.addressDTO.county}, ${user.addressDTO.postCode},
+            ${user.addressDTO.country}`}
           </h3>
         </div>
       )}

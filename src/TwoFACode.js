@@ -28,6 +28,8 @@ function TwoFACode() {
   const email = location.state?.email || ''; 
 
   const url = `http://localhost:8080/api/emails/${email}/codes/${values.code}`;
+
+  const admin_url = `http://localhost:8082/api/emails/${email}/codes/${values.code}`;
   
   useEffect(() => {
    
@@ -35,20 +37,44 @@ function TwoFACode() {
       
       setIsLoading(true);
       setIsError(false);
-     
+      
+      const eml = email.substring(email.length - 12)
+
+      console.log(eml)
+
       try {
 
-        const response = await fetch(url, {
-          method: 'PUT'
-        });
-       
-        if (!response.ok) {
-          
-          setIsError(true);
-         
-        } else {
-          //console.log(response.json)
-          navigate('/custprofile', { state: { email: email } } );
+        if(eml !== "@infosys.com") {
+
+          const response = await fetch(url, {
+            method: 'PUT'
+          });
+        
+          if (!response.ok) {
+            
+            setIsError(true);
+            
+          } else {
+            //console.log(response.json)
+            navigate('/custprofile', { state: { email: email } } );
+
+          }
+
+        } else if (eml === "@infosys.com") {
+
+          const response = await fetch(admin_url, {
+            method: 'PUT'
+          });
+        
+          if (!response.ok) {
+            
+            setIsError(true);
+            
+          } else {
+            //console.log(response.json)
+            navigate('/adminportal', { state: { email: email } } );
+
+          }
 
         }
 
@@ -67,7 +93,7 @@ function TwoFACode() {
       putRequest(email);
     }
 
-  }, [email, errors.code, navigate, url]);
+  }, [email, errors.code, navigate, url, admin_url]);
 
   return (
     <div className="">

@@ -1,6 +1,6 @@
 function CodeValidation(values) {
     let error = {}
-    const code_pattern = /^[0-9]+$/
+    const code_pattern = /^[0-9]{4,}$/
 
     if(values.code === "") {
         error.code = "Code should not be empty"

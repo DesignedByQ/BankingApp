@@ -20,11 +20,14 @@ function Login() {
   };
 
   const handleSubmit = (event) => {
+    console.log(111)
     event.preventDefault();
     setErrors(Validation(values));
   };
 
   const url = `http://localhost:8080/api/emails/${values.email}/password/${values.password}/2fa`;
+
+  const admin_url = `http://localhost:8082/api/emails/${values.email}/password/${values.password}/2fa`;
 
   useEffect(() => {
     
@@ -32,28 +35,55 @@ function Login() {
 
       setIsLoading(true);
       setIsError(false);
+
+      const emails = values.email
       
-      try {
-        const response = await fetch(url, {
-          method: 'PUT'
-        });
+      const eml = emails.substring(emails.length - 12)
 
-        if (!response.ok) {
-          
+      console.log(eml)
+
+        try {
+
+          if(eml !== "@infosys.com") {
+
+            const response = await fetch(url, {
+              method: 'PUT'
+            });
+
+            if (!response.ok) {
+            
+              setIsError(true);
+              
+            } else {
+  
+              navigate('/twofacode', { state: { email: values.email } });
+  
+            }
+
+          } else if (eml === "@infosys.com"){
+
+            const response = await fetch(admin_url, {
+              method: 'PUT'
+            });
+
+            if (!response.ok) {
+            
+              setIsError(true);
+              
+            } else {
+  
+              navigate('/twofacode', { state: { email: values.email } });
+  
+            }
+
+          }
+
+        } catch (error) {
+
           setIsError(true);
-          
-        } else {
-
-          navigate('/twofacode', { state: { email: values.email } });
+          console.log(error);
 
         }
-
-      } catch (error) {
-
-        setIsError(true);
-        console.log(error);
-
-      }
 
       setIsLoading(false);
 
@@ -63,7 +93,7 @@ function Login() {
       putRequest();
     }
 
-  }, [errors.email, errors.password, values.email, navigate, url]);
+  }, [errors.email, errors.password, values.email, navigate, url, admin_url]);
 
   return (
     <div className="">

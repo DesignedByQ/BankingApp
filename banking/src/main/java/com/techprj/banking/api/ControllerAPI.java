@@ -1,6 +1,7 @@
 package com.techprj.banking.api;
 
-import java.util.List;
+
+ import java.util.List;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -19,21 +20,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.techprj.banking.dto.LoginLogDTO;
 import com.techprj.banking.dto.UserProfileDTO;
-import com.techprj.banking.entity.UserProfile;
 import com.techprj.banking.service.AccExistsService;
 import com.techprj.banking.service.DAOService;
 import com.techprj.banking.service.EmailServiceDAOImpl;
 import com.techprj.banking.service.INTServiceDAOImpl;
-
 import com.techprj.banking.service.SMSServiceDAOImpl;
+import com.techprj.registration.dto.RegDetailsDTO;
 
 @RestController
 @RequestMapping("/api")
 @Validated
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class ControllerAPI {
 
 	@Autowired
@@ -51,8 +52,20 @@ public class ControllerAPI {
 	@Autowired
 	AccExistsService accExistsService;
 	
+	@Autowired
+	RestTemplate restTemplate;
+	
 	@PostMapping(value="/adduser", consumes = {MediaType.ALL_VALUE})
-	public ResponseEntity<UserProfileDTO> addUser(@RequestBody UserProfileDTO userProfileDTO) {
+	public ResponseEntity<UserProfileDTO> addUser(@RequestBody UserProfileDTO userProfileDTO) throws AddressException, MessagingException {
+		
+		//send email to cust and delete oject from registration DB
+		emailServiceDAOImpl.sendApproval(userProfileDTO);
+		//need to go in reg MS and set it as approved  by email using patch method
+		
+		
+		//RegDetailsDTO rddto = restTemplate.patchForObject("http://Registration/api/updateapplication" + userProfileDTO.getEmail(), RegDetailsDTO.class, RegDetailsDTO.class);
+		
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(intServiceDAOImpl.addUser(userProfileDTO));
 				
 	}

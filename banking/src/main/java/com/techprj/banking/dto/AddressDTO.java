@@ -3,7 +3,7 @@ package com.techprj.banking.dto;
 public class AddressDTO {
 	
 	private Integer addressID;
-	private Integer buildingNo;
+	private String buildingNo;
 	private String firstLine;
 	private String secondLine;
 	private String city;
@@ -15,7 +15,7 @@ public class AddressDTO {
 		super();
 	}
 
-	public AddressDTO(Integer addressID, Integer buildingNo, String firstLine, String secondLine, String city,
+	public AddressDTO(Integer addressID, String buildingNo, String firstLine, String secondLine, String city,
 			String county, String postCode, String country) {
 		super();
 		this.addressID = addressID;
@@ -36,11 +36,11 @@ public class AddressDTO {
 		this.addressID = addressID;
 	}
 
-	public Integer getBuildingNo() {
+	public String getBuildingNo() {
 		return buildingNo;
 	}
 
-	public void setBuildingNo(Integer buildingNo) {
+	public void setBuildingNo(String buildingNo) {
 		this.buildingNo = buildingNo;
 	}
 

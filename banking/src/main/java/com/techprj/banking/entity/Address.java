@@ -16,7 +16,7 @@ public class Address {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "address_ID")
 	private Integer addressID;
-	private Integer buildingNo;
+	private String buildingNo;
 	private String firstLine;
 	private String secondLine;
 	private String city;
@@ -30,7 +30,7 @@ public class Address {
 		super();
 	}
 
-	public Address(Integer addressID, Integer buildingNo, String firstLine, String secondLine, String city,
+	public Address(Integer addressID, String buildingNo, String firstLine, String secondLine, String city,
 			String county, String postCode, String country) {
 		super();
 		this.addressID = addressID;
@@ -51,11 +51,11 @@ public class Address {
 		this.addressID = addressID;
 	}
 
-	public Integer getBuildingNo() {
+	public String getBuildingNo() {
 		return buildingNo;
 	}
 
-	public void setBuildingNo(Integer buildingNo) {
+	public void setBuildingNo(String buildingNo) {
 		this.buildingNo = buildingNo;
 	}
 

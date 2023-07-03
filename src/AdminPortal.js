@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AdminPortal() {
 
@@ -60,7 +61,7 @@ function AdminPortal() {
 
         <div>Staff ID: {user.idAdmin}</div>
         <div><h1>Welcome  {user.firstName}</h1></div>
-        <div>Position: ${}</div>
+        <div>Position: {user.username}</div>
 
         <div>What would you like to do today?</div>
 
@@ -75,10 +76,10 @@ function AdminPortal() {
 
         </div>
 
-        <div><button >Verify Accounts</button></div>
+        <div><button type="type"><Link to="/verifyaccounts" className="">Verify Accounts</Link></button></div>
 
         <div><button >Add Staff</button></div>
-        <div><button >Login List</button></div>
+        <div><button >Login Log</button></div>
         <div><button >Process Payments</button></div>
         <div><button >Compensation Claim</button></div>
 

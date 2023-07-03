@@ -10,6 +10,7 @@ export class VerifyAccounts extends Component {
       isError: false,
       approvedCust: {},
       newItem: {},
+      RejectionReason: '',
     };
   }
 
@@ -64,7 +65,7 @@ export class VerifyAccounts extends Component {
     const { newItem, approvedCust } = this.state;
 
     newItem.approved = true;
-    newItem.verdict = 'Your application for a new bank account has been approved!'
+    newItem.verdict = "Your application for a new account has been approved! Please use your email address and password to login. You will then be sent a 2 Factor Authentication code via email to access your customer portal."
     //console.log(item)
     
 
@@ -162,6 +163,65 @@ export class VerifyAccounts extends Component {
 
     }
 
+    handleInput = async (event) => {
+
+        this.setState({RejectionReason: event.target.value });
+         
+    }   
+
+    handleRejection = async (event, item) => {
+
+        event.preventDefault();
+
+        const { newItem, RejectionReason } = this.state;
+
+        newItem.verdict = RejectionReason
+        newItem.rejected = true
+
+        const update_url = `http://localhost:8081/api/updateapplication/${item.email}`;
+    
+        this.setState({ isLoading: true, isError: false });
+    
+        try {
+            
+            const response3 = await fetch(update_url, {
+                method: 'PATCH',
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Content-Type': 'application/json',
+                    
+                },
+                
+                body: JSON.stringify(newItem)
+                
+            });
+    
+            if (!response3.ok) {
+    
+                this.setState({ isError: true });
+              
+            } else {
+
+                console.log(response3)
+                //window.location.reload();  
+                this.getRequest()
+
+            } 
+                    
+            } catch (error) {
+    
+                this.setState({ isError: true })
+                console.log(error);
+    
+            }
+    
+        this.setState({ isLoading: false })
+    
+    }
+        
+ 
+
+
 
   render() {
     const { user, isLoading, isError } = this.state;
@@ -176,7 +236,7 @@ export class VerifyAccounts extends Component {
       <div>
         <h2>Choose an account from below to start</h2>
         {user.map((item) => {
-            if (!item.approved) {
+            if (!item.approved & !item.rejected) {
                 return (
                     <form action="" onSubmit={(event) => this.handleSubmit(event, item)} key={item.id}>
         
@@ -215,14 +275,18 @@ export class VerifyAccounts extends Component {
                                 <object data={this.renderImage(item.fileDTO.fileData, item.fileDTO.fileType)} type="application/pdf" width="75%" height="100%">
                                     <p>This browser does not support PDF rendering.</p>
                                 </object> ) : ( <img src={this.renderImage(item.fileDTO.fileData, item.fileDTO.fileType)} alt="Customers proof of ID"/>)}
-                                </div>
+                        </div>
                                 
                         <p>Approved: {item.approved.toString()}</p>
-                        <p>Customer Message: {item.verdict}</p>
+                        <p>Approved: {item.rejected.toString()}</p>
 
                         <button type="submit">Approve Account</button> 
-                        {/* sends cust dets to add cust url with put req of approved = true and verdict = "account approved" and sends approval email*/}
-                        <button type="submit">Reject Account</button>
+                        
+                        <div>
+                            <label htmlFor="RejectionReason">Rejection-Reason</label>
+                            <textarea type="text" rows="5" col="10" name="RejectionReason" spellCheck="true" placeholder="Provide a message so the customer knows why their application has been rejected. Kindly request they resubmit their application with the correct details." onChange={this.handleInput}></textarea>
+                        </div>
+                        <button type="button" onClick={(event) => this.handleRejection(event, item)}>Reject Account</button>
                         <h4>*************************************</h4>
                         
                     </div>

@@ -179,6 +179,8 @@ export class VerifyAccounts extends Component {
         newItem.rejected = true
 
         const update_url = `http://localhost:8081/api/updateapplication/${item.email}`;
+
+        const delete_url = `http://localhost:8081/api/deleteapplication/${item.email}`;
     
         this.setState({ isLoading: true, isError: false });
     
@@ -206,6 +208,28 @@ export class VerifyAccounts extends Component {
                 //window.location.reload();  
                 this.getRequest()
 
+                const response4 = await fetch(delete_url, {
+                    method: 'DELETE',
+                    headers: {
+                        'Access-Control-Allow-Origin': 'http://localhost:3000',
+                        'Content-Type': 'application/json',
+                        
+                    },
+                    
+                });
+
+                if (!response4.ok) {
+    
+                    this.setState({ isError: true });
+                  
+                } else {
+
+                    console.log(response4)
+                    //window.location.reload();  
+                    this.getRequest()
+
+                }
+
             } 
                     
             } catch (error) {
@@ -219,10 +243,6 @@ export class VerifyAccounts extends Component {
     
     }
         
- 
-
-
-
   render() {
     const { user, isLoading, isError } = this.state;
 

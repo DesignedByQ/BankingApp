@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function AdminPortal() {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-  
+      
     const { email } = location.state || {};  
 
     const admin_url = `http://localhost:8082/api/getadmin/${email}`;
@@ -54,6 +56,10 @@ function AdminPortal() {
         return <div>Error occurred while fetching data</div>;
     }
 
+    const getLog = async () => {
+      navigate('/adminlogin', { state: { email: email } });
+    }
+
 
 
   return (
@@ -79,9 +85,11 @@ function AdminPortal() {
         <div><button type="type"><Link to="/verifyaccounts" className="">Verify Accounts</Link></button></div>
 
         <div><button >Add Staff</button></div>
-        <div><button >Login Log</button></div>
+        <div><button type='button' onClick={getLog()}>Login Log</button></div>
+
         <div><button >Process Payments</button></div>
         <div><button >Compensation Claim</button></div>
+        <div><button type='button'><Link to="/" className="">Log Out</Link></button></div>
 
         <p>To do list: You currently have ${} customer accounts waiting to be verified.</p>
     </div>
@@ -89,3 +97,4 @@ function AdminPortal() {
 }
 
 export default AdminPortal
+

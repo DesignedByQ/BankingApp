@@ -7,6 +7,8 @@ import CustProfile from "./CustProfile";
 import Submitted from "./Submitted";
 import AdminPortal from "./AdminPortal";
 import { VerifyAccounts } from "./components/VerifyAccounts";
+//import AdminLogins from "./components/AdminLogins";
+import AdminLogin from "./AdminLogin";
 
 
 function App() {
@@ -19,7 +21,8 @@ function App() {
                 <Route path='/custprofile' element={<CustProfile />}></Route>
                 <Route path='/submitted' element={<Submitted />}></Route>
                 <Route path='/adminportal' element={<AdminPortal />}></Route>
-                <Route path='/verifyAccounts' element={<VerifyAccounts />}></Route>
+                <Route path='/verifyaccounts' element={<VerifyAccounts />}></Route>
+                <Route path='/adminlogin' element={<AdminLogin />}></Route>
             </Routes>
         </BrowserRouter>
     );

@@ -8,7 +8,7 @@ function CustProfile() {
   const [isError, setIsError] = useState(false);
 
   const { email } = location.state || {};
-
+  
   //const email = location.state?.email || '';
   const url = `http://localhost:8080/api/getprofile/${email}`;
 

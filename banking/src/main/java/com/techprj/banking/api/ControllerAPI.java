@@ -30,6 +30,7 @@ import com.techprj.banking.service.EmailServiceDAOImpl;
 import com.techprj.banking.service.INTServiceDAOImpl;
 import com.techprj.banking.service.SMSServiceDAOImpl;
 import com.techprj.registration.dto.RegDetailsDTO;
+import com.techprj.registration.entity.RegDetails;
 
 @RestController
 @RequestMapping("/api")
@@ -59,7 +60,7 @@ public class ControllerAPI {
 	public ResponseEntity<UserProfileDTO> addUser(@RequestBody UserProfileDTO userProfileDTO) throws AddressException, MessagingException {
 		
 		//send email to cust and delete oject from registration DB
-		emailServiceDAOImpl.sendApproval(userProfileDTO);
+		//emailServiceDAOImpl.sendApproval(userProfileDTO);
 		//need to go in reg MS and set it as approved  by email using patch method
 		
 		
@@ -68,6 +69,11 @@ public class ControllerAPI {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(intServiceDAOImpl.addUser(userProfileDTO));
 				
+	}
+	
+	@PostMapping(value="/email/{email}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})
+	public ResponseEntity<Boolean> sendApproval(@PathVariable("email") String email, @RequestBody RegDetails regDetails) throws AddressException, MessagingException {
+		return ResponseEntity.status(HttpStatus.OK).body(emailServiceDAOImpl.sendVerdict(email, regDetails));
 	}
 	
 	@GetMapping(value="/getprofile/{emailid}", consumes = {MediaType.ALL_VALUE}, produces = {"application/json", "application/xml"})

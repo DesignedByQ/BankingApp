@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+//import AdminLogin from './AdminLogin';
 
 function AdminPortal() {
 
@@ -60,8 +61,6 @@ function AdminPortal() {
       navigate('/adminlogin', { state: { email: email } });
     }
 
-
-
   return (
     <div>
 
@@ -85,13 +84,18 @@ function AdminPortal() {
         <div><button type="type"><Link to="/verifyaccounts" className="">Verify Accounts</Link></button></div>
 
         <div><button >Add Staff</button></div>
-        <div><button type='button' onClick={getLog()}>Login Log</button></div>
 
-        <div><button >Process Payments</button></div>
+        <div><button type='button' onClick={getLog}>Login Log</button></div>
+
+        <div><button type='button'><Link to="/adminpayments">Process Payments</Link></button></div>
+
+
         <div><button >Compensation Claim</button></div>
         <div><button type='button'><Link to="/" className="">Log Out</Link></button></div>
 
         <p>To do list: You currently have ${} customer accounts waiting to be verified.</p>
+
+        {/* <AdminLogin email={email} /> */}
     </div>
   )
 }

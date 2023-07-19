@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import { Link } from "react-router-dom";
 
 export class VerifyAccounts extends Component {
 
@@ -11,6 +12,8 @@ export class VerifyAccounts extends Component {
       approvedCust: {},
       newItem: {},
       RejectionReason: '',
+      custAcc: {},
+      newData: {},
     };
   }
 
@@ -54,21 +57,18 @@ export class VerifyAccounts extends Component {
     return null;
   }
 
- 
-
   handleSubmit = async (event, item) => {
   
     event.preventDefault();
     //console.log(this.state.user)
     //console.log(item)
 
-    const { newItem, approvedCust } = this.state;
+    const { newItem, approvedCust, custAcc } = this.state; 
 
     newItem.approved = true;
     newItem.verdict = "Your application for a new account has been approved! Please use your email address and password to login. You will then be sent a 2 Factor Authentication code via email to access your customer portal."
     //console.log(item)
     
-
     approvedCust.authUserDTO = {
         //idAuthUser: null,
         username: item.username,
@@ -91,8 +91,6 @@ export class VerifyAccounts extends Component {
         postCode: item.addressDTO.postCode,
         country: item.addressDTO.country,
     };
-    
-    //do patch req to reg db with amended approved and verdict which will trigger email to cust
 
     //console.log(JSON.stringify(approvedCust))
     //console.log(JSON.stringify(this.state.user[0]["firstname"]))
@@ -100,24 +98,27 @@ export class VerifyAccounts extends Component {
     const url = "http://localhost:8080/api/adduser";
 
     const update_url = `http://localhost:8081/api/updateapplication/${item.email}`;
+
+    const account_url = `http://localhost:8083/api/createaccount`;
     
     this.setState({ isLoading: true, isError: false });
 
     try {
         //console.log(JSON.stringify(this.state.user))
         const response1 = await fetch(url, {
-          method: 'POST',
-          headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:3000', 
-              'Content-Type': 'application/json',
-                
-          },
-          
-          body: JSON.stringify(approvedCust)
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000', 
+                'Content-Type': 'application/json',
+                    
+            },
+            
+            body: JSON.stringify(approvedCust)
           
         });
 
         let response2;
+        let response5;
 
         if (!response1.ok) {
 
@@ -127,7 +128,9 @@ export class VerifyAccounts extends Component {
 
             const data = await response1.json();
             console.log(data)
+           
             console.log(newItem)
+
             response2 = await fetch(update_url, {
                 method: 'PATCH',
                 headers: {
@@ -139,18 +142,50 @@ export class VerifyAccounts extends Component {
                 body: JSON.stringify(newItem)
                 
             });
+
+            custAcc.type = item.account;
+            custAcc.balance = 0;
+            custAcc.userProfileDTO = [data]
+            console.log(custAcc)
+            response5 = await fetch(account_url, {
+                method: 'POST',
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000',
+                    'Content-Type': 'application/json',
+                },
+
+                body: JSON.stringify(custAcc)
+
+            });
+
+            //console.log(custAcc)
     
-         } 
+        } 
 
-         if (!response2.ok) {
-            
-            this.setState({ isError: true })
-            
-         } else {
+        //Update registation DB response
+        if (!response2.ok) {
+        
+        this.setState({ isError: true })
+        
+        } else {
 
-              //window.location.reload();  
+            //window.location.reload();  
             this.getRequest()
-         } 
+        } 
+
+        //Add account response
+        if (!response5.ok) {
+        
+            this.setState({ isError: true })
+        
+        } else {
+
+            //window.location.reload();  
+            this.getRequest()
+            const accDets = await response5.json();
+            console.log(accDets)
+
+        } 
                 
         } catch (error) {
 
@@ -252,11 +287,22 @@ export class VerifyAccounts extends Component {
     if (isError) {
       return <div>Error occurred while fetching data</div>;
     }
+
     return (
+        
       <div>
+                    {/* <div>
+                {selectedItem && selectedItem.email && (
+                <button type="button">
+                    <Link to={{ pathname: "/adminportal", state: { email: selectedItem.email } }}>ADMIN PORTAL</Link>
+                </button>
+                )}
+              
+            </div> */}
         <h2>Choose an account from below to start</h2>
         {user.map((item) => {
             if (!item.approved & !item.rejected) {
+                
                 return (
                     <form action="" onSubmit={(event) => this.handleSubmit(event, item)} key={item.id}>
         
@@ -309,16 +355,19 @@ export class VerifyAccounts extends Component {
                         <button type="button" onClick={(event) => this.handleRejection(event, item)}>Reject Account</button>
                         <h4>*************************************</h4>
                         
-                    </div>
+                    </div>                  
                     </form>
                 );
             
             }
+
             return null;
-        })}
+        })}  
       </div>
     );
+    
   }
+  
 }
 
 export default VerifyAccounts;

@@ -9,6 +9,7 @@ import AdminPortal from "./AdminPortal";
 import { VerifyAccounts } from "./components/VerifyAccounts";
 //import AdminLogins from "./components/AdminLogins";
 import AdminLogin from "./AdminLogin";
+import AdminPayments from "./AdminPayments";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                 <Route path='/adminportal' element={<AdminPortal />}></Route>
                 <Route path='/verifyaccounts' element={<VerifyAccounts />}></Route>
                 <Route path='/adminlogin' element={<AdminLogin />}></Route>
+                <Route path='/adminpayments' element={<AdminPayments />}></Route>
             </Routes>
         </BrowserRouter>
     );

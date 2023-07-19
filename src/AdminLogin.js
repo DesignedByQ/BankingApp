@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-
-  const { email } = location.state || {};
-  //console.log(email)
-  const get_url = `http://localhost:8082/api/getlog/${email}`;
+  const navigate = useNavigate();
+  
+  const goBack = () => {
+    navigate(-1);
+  }
 
   //console.log(email)
   useEffect(() => {
+
+    const { email } = location.state || {};
+    console.log(email)
+    const get_url = `http://localhost:8082/api/getlog/${email}`;
 
     const getRequest = async () => {
 
@@ -29,6 +35,7 @@ function AdminLogin() {
           } else {
             const data = await response.json();
             setUser(data);
+            console.log(data)
             
           }
         } catch (error) {
@@ -42,12 +49,12 @@ function AdminLogin() {
     if(email){
         getRequest();
     }
-}, [email, get_url]);
-console.log(user)
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
+}, [location]);
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
 
   if (isLoading) {
+    //console.log(email)
     return <div>Loading...</div>;
   }
 
@@ -59,21 +66,18 @@ console.log(user)
 
     <div>
       {user.map((item) => (
-        <div key={item.id}>
+        <div key={item.idLoginLog}>
           <h2>Recent Login History</h2>
           <h3>Login ID: {item.idLoginLog}</h3>
           <h3>IP Address: {item.iP}</h3>
           <h3>Location: {item.location}</h3>
           <h3>Event Time: {item.eventTime}</h3>
-          <h3>Staff: {item.adminDTO.email}</h3>
-          
+          <h3>Staff: {item.adminDTO.email}</h3>    
         </div>
       ))}
-        
-      <button type="submit">
-        <Link to="/adminportal" className="">
-          ADMIN PORTAL
-        </Link>
+
+      <button onClick={goBack}>
+      ADMIN PORTAL
       </button>
     </div>
   );

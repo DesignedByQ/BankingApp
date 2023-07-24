@@ -48,6 +48,10 @@ function AdminPortal() {
     }
 
 }, [email, admin_url]);
+
+    // start = () => {
+      
+    // }
   
     if (isLoading) {
         return <div>Loading...</div>;
@@ -68,8 +72,6 @@ function AdminPortal() {
         <div><h1>Welcome  {user.firstName}</h1></div>
         <div>Position: {user.username}</div>
 
-        <div>What would you like to do today?</div>
-
         <div>
         <h2>Your Admin Details</h2>
         <h3>Full Name: {user.firstName} {user.middleName} {user.lastName}</h3>
@@ -79,18 +81,18 @@ function AdminPortal() {
  
         <h3>Staff Since: {user.staffSince}</h3>
 
+        <div>What would you like to do today?</div>
+
         </div>
 
         <div><button type="type"><Link to="/verifyaccounts" className="">Verify Accounts</Link></button></div>
 
-        <div><button >Add Staff</button></div>
+        <div><button ><Link to="/addstaff" className="">Add Staff</Link></button></div>
 
         <div><button type='button' onClick={getLog}>Login Log</button></div>
 
         <div><button type='button'><Link to="/adminpayments">Process Payments</Link></button></div>
 
-
-        <div><button >Compensation Claim</button></div>
         <div><button type='button'><Link to="/" className="">Log Out</Link></button></div>
 
         <p>To do list: You currently have ${} customer accounts waiting to be verified.</p>

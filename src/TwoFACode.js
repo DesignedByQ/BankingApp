@@ -53,6 +53,7 @@ function TwoFACode() {
           if (!response.ok) {
             
             setIsError(true);
+            console.log(response)
             
           } else {
             //console.log(response.json)

@@ -326,7 +326,9 @@ function AdminPayments() {
                 clearTimeout(timer);
             }
 
-        } else if (isTransferSuccessfulInt) {
+        } 
+        
+        if (isTransferSuccessfulInt) {
 
             const timer = setTimeout(() => {
                 setIsTransferSuccessfulInt(false);
@@ -336,7 +338,9 @@ function AdminPayments() {
                 clearTimeout(timer);
             }
 
-        } else if (isTransferSuccessfulExt) {
+        } 
+        
+        if (isTransferSuccessfulExt) {
 
             const timer = setTimeout(() => {
                 setIsTransferSuccessfulExt(false);

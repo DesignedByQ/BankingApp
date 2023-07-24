@@ -1,0 +1,246 @@
+import React from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+function AddStaff() {
+
+    const navigate = useNavigate();
+    const [staffCreated, setStaffCreated] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [staff, setValues] = useState({
+
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        mobile: "",
+        email: "",
+        authUserDTO: {
+            username: "",
+            password: "",
+            isSuperuser: false,
+            isStaff: true,
+        },
+        addressDTO: {
+            buildingNo: "",
+            firstLine: "",
+            secondLine: "",
+            city: "",
+            county: "",
+            postCode: "",
+            //country: "",
+        }
+    })
+
+    const handleInput = (event) => {
+
+        const { name, value } = event.target;
+
+        if (name.includes('.')) {
+
+            const [parent, child] = name.split('.');
+
+            setValues((prev) => ({...prev, [parent]: { ...prev[parent], [child]: value }}));
+        
+        } else {
+
+            setValues((prev) => ({
+                ...prev, [name]: value
+            }));
+
+        }
+
+    }
+
+    // send post request with body to addadmin
+    
+    const url = `http://localhost:8082/api/addadmin`;
+
+    const handleSubmit = async (event) => {
+       // console.log(values)
+        event.preventDefault();
+        //setErrors(Validation(values));
+
+        setIsLoading(true);
+        setIsError(false);
+
+        try {
+            console.log(JSON.stringify(staff))
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000', 
+                    'Content-Type': 'application/json',
+    
+                },
+                
+                body: JSON.stringify(staff)
+                
+            });
+    
+            if (!response.ok) {
+                
+                setIsError(true);
+                
+            } else {
+
+                const data = await response.json();
+                console.log(data)
+                
+                setStaffCreated(true)
+                //navigate('/submitted', { state: { submittedValues: data } });
+    
+            }
+    
+            } catch (error) {
+    
+                setIsError(true);
+                console.log(error);
+    
+            }
+    
+            setIsLoading(false);
+
+    };
+
+    useEffect(() => {
+
+        if (staffCreated) {
+
+            const timer = setTimeout(() => {
+                setStaffCreated(false);
+            }, 5000);
+
+            return () => {
+                clearTimeout(timer);
+            }
+
+        } 
+
+    }, [staffCreated]);
+
+    const goBack = () => {
+        navigate(-1);
+    }
+  
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    
+    if (isError) {
+        return <div>Error occurred while fetching data</div>;
+    }
+
+  return (
+    <div>
+        
+        <h2>Enter new staff details below:</h2>
+
+        <form onSubmit={handleSubmit}>
+
+            <h3>Full Name</h3>
+
+                <div>
+                    <label htmlFor="firstName">First Name</label>
+                    <input type="text" placeholder="Enter First Name" name="firstName" 
+                    onChange={handleInput} />
+                  
+                </div>
+
+                <div>
+                    <label htmlFor="middleName">Middle Name</label>
+                    <input type="text" placeholder="Enter Middle Name" name="middleName" 
+                    onChange={handleInput} />
+              
+                </div>
+
+                <div>
+                    <label htmlFor="lastName">Last Name</label>
+                    <input type="text" placeholder="Enter Last Name" name="lastName" 
+                    onChange={handleInput} />
+                   
+                </div>
+
+                <h3>Contact Details</h3>
+
+                <div>
+                    <label htmlFor="mobile">Mobile</label>
+                    <input type="text" placeholder="Enter Mobile Number" name="mobile" 
+                    onChange={handleInput} />
+                
+                </div>
+
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="Enter Email" name="email" 
+                    onChange={handleInput} />
+                  
+                </div>
+
+                <h3>Authentication Details</h3>
+
+                <div>
+
+                    <label htmlFor="authUserDTO.username">User Name</label>
+                    <input type="text" placeholder="Enter Username" name="authUserDTO.username" 
+                    onChange={handleInput} />
+                   
+
+                    <label htmlFor="authUserDTO.password">Password</label>
+                    <input type="password" placeholder="Enter Password" name="authUserDTO.password" 
+                    onChange={handleInput} />
+                   
+                </div>
+
+                <h3>Address</h3>
+
+                <div>
+                    <label htmlFor="addressDTO.buildingNo">Building No.</label>
+                    <input type="text" placeholder="Enter Building Number" name="addressDTO.buildingNo" 
+                    onChange={handleInput} />
+                   
+
+                    <label htmlFor="addressDTO.firstLine">First Line</label>
+                    <input type="text" placeholder="Enter First Line" name="addressDTO.firstLine" 
+                    onChange={handleInput} />
+                   
+
+                    <label htmlFor="addressDTO.secondLine">Second Line</label>
+                    <input type="text" placeholder="Enter Second Line" name="addressDTO.secondLine" 
+                    onChange={handleInput} />
+                    
+
+                    <label htmlFor="addressDTO.city">City</label>
+                    <input type="text" placeholder="Enter City" name="addressDTO.city" 
+                    onChange={handleInput} />
+                   
+
+                    <label htmlFor="addressDTO.county">County</label>
+                    <input type="text" placeholder="Enter County" name="addressDTO.county" 
+                    onChange={handleInput} />
+                    
+
+                    <label htmlFor="addressDTO.postCode">Post Code</label>
+                    <input type="text" placeholder="Enter Post Code" name="addressDTO.postCode" 
+                    onChange={handleInput} />
+                    
+
+                    {/* <label htmlFor="country">Country</label>
+                    <input type="text" placeholder="Enter Country" name="country" 
+                    onChange={handleInput} /> */}
+                    
+                </div>
+                <p></p>
+                <div>
+                    <button type='submit'>Create Admin User</button>
+                </div>
+                <h1>{staffCreated && "Staff member created successfully!"}</h1>
+        </form>
+
+        <button onClick={goBack}>ADMIN PORTAL</button>
+    </div>
+  )
+}
+
+export default AddStaff

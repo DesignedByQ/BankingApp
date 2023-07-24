@@ -11,6 +11,9 @@ import { VerifyAccounts } from "./components/VerifyAccounts";
 import AdminLogin from "./AdminLogin";
 import AdminPayments from "./AdminPayments";
 
+import AddStaff from "./AddStaff";
+import CustLogin from "./CustLogin";
+
 
 function App() {
     return (
@@ -25,6 +28,9 @@ function App() {
                 <Route path='/verifyaccounts' element={<VerifyAccounts />}></Route>
                 <Route path='/adminlogin' element={<AdminLogin />}></Route>
                 <Route path='/adminpayments' element={<AdminPayments />}></Route>
+
+                <Route path='/addstaff' element={<AddStaff />}></Route>
+                <Route path='/custlogin' element={<CustLogin />}></Route>
             </Routes>
         </BrowserRouter>
     );

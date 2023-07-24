@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export class VerifyAccounts extends Component {
 
@@ -277,6 +277,10 @@ export class VerifyAccounts extends Component {
         this.setState({ isLoading: false })
     
     }
+
+    // goBack = () => {
+    //   this.props.history.goBack();
+    // }
         
   render() {
     const { user, isLoading, isError } = this.state;
@@ -286,7 +290,7 @@ export class VerifyAccounts extends Component {
     }
     if (isError) {
       return <div>Error occurred while fetching data</div>;
-    }
+    }  
 
     return (
         
@@ -304,9 +308,10 @@ export class VerifyAccounts extends Component {
             if (!item.approved & !item.rejected) {
                 
                 return (
+                  
                     <form action="" onSubmit={(event) => this.handleSubmit(event, item)} key={item.id}>
         
-                    <div>
+                      <div>
                         <h3>Customer ID: {item.custid}</h3>
 
                         <h3>Customer Name: </h3>
@@ -355,14 +360,20 @@ export class VerifyAccounts extends Component {
                         <button type="button" onClick={(event) => this.handleRejection(event, item)}>Reject Account</button>
                         <h4>*************************************</h4>
                         
-                    </div>                  
+                      </div>                
                     </form>
+                    
                 );
             
             }
 
             return null;
+
         })}  
+
+        <button type="button" ><Link to="/adminportal">Admin Portal</Link></button>
+        
+
       </div>
     );
     

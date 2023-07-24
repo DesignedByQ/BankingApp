@@ -63,16 +63,18 @@ function AdminLogin() {
   }
 
   return (
-
+    
     <div>
+      <h2>Recent Login History</h2>
       {user.map((item) => (
         <div key={item.idLoginLog}>
-          <h2>Recent Login History</h2>
+          
           <h3>Login ID: {item.idLoginLog}</h3>
           <h3>IP Address: {item.iP}</h3>
           <h3>Location: {item.location}</h3>
           <h3>Event Time: {item.eventTime}</h3>
-          <h3>Staff: {item.adminDTO.email}</h3>    
+          <h3>Staff: {item.adminDTO.email}</h3>   
+          <hr></hr> 
         </div>
       ))}
 

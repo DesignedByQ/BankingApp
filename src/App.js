@@ -10,7 +10,7 @@ import { VerifyAccounts } from "./components/VerifyAccounts";
 //import AdminLogins from "./components/AdminLogins";
 import AdminLogin from "./AdminLogin";
 import AdminPayments from "./AdminPayments";
-
+import EditCust from "./EditCust";
 import AddStaff from "./AddStaff";
 import CustLogin from "./CustLogin";
 
@@ -28,7 +28,7 @@ function App() {
                 <Route path='/verifyaccounts' element={<VerifyAccounts />}></Route>
                 <Route path='/adminlogin' element={<AdminLogin />}></Route>
                 <Route path='/adminpayments' element={<AdminPayments />}></Route>
-
+                <Route path='/editcust' element={<EditCust />}></Route>
                 <Route path='/addstaff' element={<AddStaff />}></Route>
                 <Route path='/custlogin' element={<CustLogin />}></Route>
             </Routes>

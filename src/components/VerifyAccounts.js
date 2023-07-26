@@ -145,6 +145,7 @@ export class VerifyAccounts extends Component {
 
             custAcc.type = item.account;
             custAcc.balance = 0;
+            custAcc.sortCode = 111111;
             custAcc.userProfileDTO = [data]
             console.log(custAcc)
             response5 = await fetch(account_url, {

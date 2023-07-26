@@ -70,7 +70,7 @@ function AdminPortal() {
 
         <div>Staff ID: {user.idAdmin}</div>
         <div><h1>Welcome  {user.firstName}</h1></div>
-        <div>Position: {user.username}</div>
+        <div>Position: {user.authUserDTO.jobRole}</div>
 
         <div>
         <h2>Your Admin Details</h2>
@@ -88,6 +88,8 @@ function AdminPortal() {
         <div><button type="type"><Link to="/verifyaccounts" className="">Verify Accounts</Link></button></div>
 
         <div><button ><Link to="/addstaff" className="">Add Staff</Link></button></div>
+
+        <div><button ><Link to="/editcust" className="">View & Edit Customer Details</Link></button></div>
 
         <div><button type='button' onClick={getLog}>Login Log</button></div>
 

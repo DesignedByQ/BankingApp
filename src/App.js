@@ -13,6 +13,7 @@ import AdminPayments from "./AdminPayments";
 import EditCust from "./EditCust";
 import AddStaff from "./AddStaff";
 import CustLogin from "./CustLogin";
+import OpenAccount from "./OpenAccount";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/editcust' element={<EditCust />}></Route>
                 <Route path='/addstaff' element={<AddStaff />}></Route>
                 <Route path='/custlogin' element={<CustLogin />}></Route>
+                <Route path='/openaccount' element={<OpenAccount />}></Route>
             </Routes>
         </BrowserRouter>
     );

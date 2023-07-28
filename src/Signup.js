@@ -1,10 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import Validation from './SignupValidation';
 import { useState } from 'react';
-//import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
 
 function Signup() {
 
@@ -291,12 +288,6 @@ function Signup() {
                 </div>
 
                 <button type="submit" className="">SIGN UP</button>
-
-                <p>OR</p>
-
-                <p>Register for a new bank account</p>
-
-                <button><Link to="/" className="">Login</Link></button>
 
             </form>
         </div>

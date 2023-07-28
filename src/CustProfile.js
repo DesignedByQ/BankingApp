@@ -397,6 +397,10 @@ const getLog = async () => {
   navigate('/custlogin', { state: { email: email } });
 }
 
+const openAccount = async () => {
+  navigate('/openaccount', { state: { email: email } });
+}
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -444,6 +448,8 @@ const getLog = async () => {
           </h3>
 
           <div><button type='button' onClick={getLog}>Login History</button></div>
+
+          <div><button type='button' onClick={openAccount}>Open Account</button></div>
 
           <h2>List of accounts</h2>
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 function EditCust() {
 
     const [deletedAccounts, setDeletedAccounts] = useState([]);
-    const [isDeleted, setIsDeleted] = useState(false);
+    //const [isDeleted, setIsDeleted] = useState(false);
     const [isEditSuccessful, setIsEditSuccessful] = useState(false);
     const [customer, setCustomer] = useState(null);
     const [isLoading, setIsLoading] = useState(false);

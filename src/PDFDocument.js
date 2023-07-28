@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const dates = new Date()
+
 const PDFDocument = ({ account, user }) => {
   return (
     <Document>
@@ -29,13 +31,16 @@ const PDFDocument = ({ account, user }) => {
             ${user.addressDTO.county}, ${user.addressDTO.postCode},
             ${user.addressDTO.country}`}</Text>
         </View>
+        <View>
+            <Text>Your account summary upto: {dates}</Text>
+        </View>
 
         {account[4]
           .slice()
           .sort((a, b) => a.transLogId - b.transLogId)
           .map((transLog, logIndex) => (
             <View key={logIndex} style={styles.listItem}>
-              <Text>Your account summary upto: {transLog.date}</Text>
+              
               
               <Text>
                 ID: {transLog.transLogId} | Date: {transLog.date} | Previous Balance: {transLog.oldBal} | From Account: {transLog.from} | Amount: {transLog.amount} | Reference: {transLog.reference} | New Balance: {transLog.newBal} | To Account: {transLog.to}

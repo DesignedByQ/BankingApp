@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react'
 function AdminPayments() {
 
     const [formData, setFormData] = useState({
+        //admin add
+        accountId5: "",
+        sortCode5: "",
+        amount5: "",
+
+        //internal
         accountId: "",
         sortCode: "",
         amount: "",
@@ -29,9 +35,9 @@ function AdminPayments() {
     const handleSubmitAdd = async (e) => {
         e.preventDefault();
 
-        const add_url = `http://localhost:8083/api/updatebalance/${formData.accountId}`;
+        const add_url = `http://localhost:8083/api/updatebalance/${formData.accountId5}`;
 
-        const url = `http://localhost:8083/api/getaccount/${formData.accountId}`;
+        const url = `http://localhost:8083/api/getaccount/${formData.accountId5}`;
 
         try {
 
@@ -48,8 +54,8 @@ function AdminPayments() {
                 console.log(data)
                 //check that the SC is the same if so add amount to balance and patch the balance
              
-                if(parseInt(formData.sortCode) === data.sortCode){
-                    data.balance += parseInt(formData.amount)
+                if(parseInt(formData.sortCode5) === data.sortCode){
+                    data.balance += parseInt(formData.amount5)
 
                     const doubleBal = Number(data.balance)
 
@@ -296,6 +302,11 @@ function AdminPayments() {
 
     const handleClearForm = () => {
         setFormData({
+            //admin add
+            accountId5: "",
+            sortCode5: "",
+            amount5: "",
+            //internal
             accountId: "",
             sortCode: "",
             amount: "",
@@ -366,14 +377,14 @@ function AdminPayments() {
 
             <div>
 
-                <label htmlFor='accountId'><h4>Account Number:</h4></label>
-                <input type="number" name='accountId' value={formData.accountId} onChange={(e) => setFormData({ ...formData, accountId: e.target.value })}/>
+                <label htmlFor='accountId5'><h4>Account Number:</h4></label>
+                <input type="number" name='accountId5' value={formData.accountId5} onChange={(e) => setFormData({ ...formData, accountId5: e.target.value })}/>
 
-                <label htmlFor='sortCode'><h4>Sort Code:</h4></label>
-                <input type="number" name='sortCode' value={formData.sortCode} onChange={(e) => setFormData({ ...formData, sortCode: e.target.value })}/>
+                <label htmlFor='sortCode5'><h4>Sort Code:</h4></label>
+                <input type="number" name='sortCode5' value={formData.sortCode5} onChange={(e) => setFormData({ ...formData, sortCode5: e.target.value })}/>
 
-                <label htmlFor='amount'><h4>Amount:</h4></label>
-                <input type="number" name='amount' value={formData.amount} onChange={(e) => setFormData({ ...formData, amount: e.target.value })}/>
+                <label htmlFor='amount5'><h4>Amount:</h4></label>
+                <input type="number" name='amount5' value={formData.amount5} onChange={(e) => setFormData({ ...formData, amount5: e.target.value })}/>
                 <p></p>
                 <small>{isTransferSuccessful && "Transfer was successful!"}</small>
                 <div>

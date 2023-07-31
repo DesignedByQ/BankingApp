@@ -6,7 +6,7 @@ function Submitted() {
 
     const location = useLocation();
 
-    const sv = location.state?.submittedValues || ''; 
+    const sv = location.state ? location.state.submittedValues: ''; 
    
   return (
     <div>

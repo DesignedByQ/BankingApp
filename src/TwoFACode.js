@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import CodeValidation from './TwoFACodeVerification';
 import { Link, useLocation,  useNavigate } from 'react-router-dom';
-//import Login from './Login';
-//import Validation from "./LoginValidation";
 
 function TwoFACode() {
 
@@ -25,7 +23,7 @@ function TwoFACode() {
     setErrors(CodeValidation(values));
   };
 
-  const email = location.state?.email || ''; 
+  const email = location.state ? location.state.email : ''; 
 
   const url = `http://localhost:8080/api/emails/${email}/codes/${values.code}`;
 
@@ -40,7 +38,7 @@ function TwoFACode() {
       
       const eml = email.substring(email.length - 12)
 
-      console.log(eml)
+      //console.log(eml)
 
       try {
 
@@ -94,7 +92,7 @@ function TwoFACode() {
       putRequest(email);
     }
 
-  }, [email, errors.code, navigate, url, admin_url]);
+  }, [admin_url, email, url, location.state, errors.code, navigate]);
 
   return (
     <div className="">

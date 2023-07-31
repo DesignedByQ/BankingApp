@@ -8,9 +8,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
-    "bootstrap": "^5.3.0",
+    "bootstrap": "^5.3.1",
     "file-saver": "^2.0.5",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.12.1",
     "react-scripts": "^5.0.1",
@@ -23,11 +24,23 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
+    "extends": ["eslint:recommended", "plugin:react/recommended",
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "plugins": ["react"],
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      
+    }
   },
+
   "browserslist": {
     "production": [
       ">0.2%",

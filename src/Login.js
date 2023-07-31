@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Validation from "./LoginValidation";
-//import TwoFACode from "./TwoFACode";
+import {Button, Form, Container, Row, Col, Card} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function Login() {
   const [values, setValues] = useState({
@@ -96,47 +97,82 @@ function Login() {
   }, [errors.email, errors.password, values.email, navigate, url, admin_url]);
 
   return (
-    <div className="">
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px'  }}>
+      <header className="App-header">
+        <Container className="bg-primary text-black d-flex justify-content-center">
+
       <div>
         {isLoading && <h2>Logging in...</h2>}
         {isError && <h2>There is no account with those credentials</h2>}
-        <h2>Sign-IN</h2>
-        <form action="" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              placeholder="Enter Email"
-              name="email"
-              onChange={handleInput}
-            />
-            {errors.email && <span>{errors.email}</span>}
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              onChange={handleInput}
-            />
-            {errors.password && <span>{errors.password}</span>}
-          </div>
+        <Row className="">
+            <Col className="mt-3">
+              <div className="d-flex justify-content-center">
+              <h1>INFOSYS BANK</h1>
+              </div>
+            
+            <h3>Sign-IN</h3>
+            </Col>
+          </Row>
+        
+        <Form action="" onSubmit={handleSubmit} >
+            <Row >
+              <Col className="">
+              <Form.Group controlId="formEmail" className="">
+                <Form.Label htmlFor="email">Email</Form.Label>
+                  <div className="d-flex justify-content-center">
+                    <Form.Control style={{ width: '400px' }} type="email" placeholder="Enter your email" name="email" onChange={handleInput} />
+                  </div>
+                  <Form.Text className="text-muted">
+                  {errors.email && <span>{errors.email}</span>}
+                  </Form.Text>
+                </Form.Group>
+              </Col>
+           
+              <Col>
+              <Form.Group controlId="formPassword">
+                <Form.Label htmlFor="password">Password</Form.Label>
+                  <div className="d-flex justify-content-center">
+                    <Form.Control style={{ width: '400px' }} type="password" placeholder="Enter your password" name="password" onChange={handleInput} />
+                  </div>
+                  <Form.Text className="text-muted">
+                  {errors.password && <span>{errors.password}</span>}
+                  </Form.Text>
+                </Form.Group>
+              </Col>
+            </Row>
+          
+          <Row className="">
+            <Col className="my-3 ">
+              <Button type="submit" className="bg-info">LOGIN</Button>
+            </Col>
+          </Row>
 
-          <button type="submit" className="">LOGIN</button>
-
-          <p>OR</p>
-
-          <p>Register for a new bank account</p>
-
-          <button type="submit">
-            <Link to="/signup" className="">
-              Start Application
-            </Link>
-          </button>
-        </form>
+          </Form>
       </div>
-      
+      </Container>
+      <Container className="d-flex justify-content-center" style={ {paddingTop: '10px'} } >
+        <Card className="mx-5 text-center">
+              <Card.Img src="Frontend\banking-app-frontend\src\Assets\register.jpg" />
+              <Card.Body>
+                <Card.Title>
+                <p>New Customers</p>
+                </Card.Title>
+                <Card.Text>
+                <p>Register for a new bank account</p>
+                </Card.Text>
+                <Row className="">
+                  <Col className="">
+                    <Button type="button" className="bg-info text-white mb-3"> 
+                      <Link to="/signup">
+                        Start Application
+                      </Link>
+                    </Button>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Container>
+      </header>
     </div>
   );
 }

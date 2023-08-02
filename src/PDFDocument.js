@@ -1,5 +1,6 @@
 // PDFDocument.js
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
@@ -52,6 +53,25 @@ const PDFDocument = ({ account, user }) => {
     </Document>
   );
 };
+
+PDFDocument.propTypes = {
+  account: PropTypes.array,
+  user: PropTypes.shape({
+    firstName: PropTypes.string,
+    middleName: PropTypes.string,
+    lastName: PropTypes.string,
+    addressDTO: PropTypes.shape({
+      buildingNo: PropTypes.string,
+      firstLine: PropTypes.string,
+      secondLine: PropTypes.string,
+      city: PropTypes.string,
+      county: PropTypes.string,
+      postCode: PropTypes.string,
+      country: PropTypes.string,
+    }),
+  }),
+};
+
 
 export default PDFDocument;
 

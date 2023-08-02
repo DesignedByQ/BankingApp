@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Button, Form, Container, Row, Col, Card } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function AdminLogin() {
   const location = useLocation();
@@ -64,23 +66,31 @@ function AdminLogin() {
 
   return (
     
-    <div>
-      <h2>Recent Login History</h2>
-      {user.map((item) => (
-        <div key={item.idLoginLog}>
-          
-          <h3>Login ID: {item.idLoginLog}</h3>
-          <h3>IP Address: {item.iP}</h3>
-          <h3>Location: {item.location}</h3>
-          <h3>Event Time: {item.eventTime}</h3>
-          <h3>Staff: {item.adminDTO.email}</h3>   
-          <hr></hr> 
-        </div>
-      ))}
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px'  }}>
+      <header className='App-header'>
+        <Container className="mb-3 bg-primary text-black d-flex justify-content-center">
+          <h2>Recent Login History</h2>
+        </Container>
 
-      <button onClick={goBack}>
-      ADMIN PORTAL
-      </button>
+        <Container className='bg-primary' style={{ paddingTop: '3px'}}>
+          {user.map((item) => (
+            <div key={item.idLoginLog}>
+              
+              <h3 className='d-flex justify-content-center'>Login ID: {item.idLoginLog}</h3>
+              <h3>IP Address: {item.iP}</h3>
+              <h3>Location: {item.location}</h3>
+              <h3>Event Time: {item.eventTime}</h3>
+              <h3>Staff: {item.adminDTO.email}</h3>   
+              <hr></hr> 
+            </div>
+          ))}
+        </Container>
+
+        <Container className='bg-primary d-flex justify-content-center'>
+          <Button type='button' className="bg-info my-2 mx-2" onClick={goBack}>ADMIN PORTAL</Button>
+        </Container>
+        
+      </header>
     </div>
   );
 }

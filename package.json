@@ -10,6 +10,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "file-saver": "^2.0.5",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
@@ -24,11 +25,15 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["eslint:recommended", "plugin:react/recommended",
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
       "react-app",
       "react-app/jest"
     ],
-    "plugins": ["react"],
+    "plugins": [
+      "react"
+    ],
     "parserOptions": {
       "ecmaVersion": 2021,
       "sourceType": "module",
@@ -36,11 +41,8 @@
         "jsx": true
       }
     },
-    "rules": {
-      
-    }
+    "rules": {}
   },
-
   "browserslist": {
     "production": [
       ">0.2%",

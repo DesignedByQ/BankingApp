@@ -356,7 +356,7 @@ export class VerifyAccounts extends Component {
                         
                         <div>
                             <label htmlFor="RejectionReason">Rejection-Reason</label>
-                            <textarea type="text" rows="5" col="10" name="RejectionReason" spellCheck="true" placeholder="Provide a message so the customer knows why their application has been rejected. Kindly request they resubmit their application with the correct details." onChange={this.handleInput}></textarea>
+                            <textarea type="text" rows="5" cols="10" name="RejectionReason" spellCheck="true" placeholder="Provide a message so the customer knows why their application has been rejected. Kindly request they resubmit their application with the correct details." onChange={this.handleInput}></textarea>
                         </div>
                         <button type="button" onClick={(event) => this.handleRejection(event, item)}>Reject Account</button>
                         <h4>*************************************</h4>

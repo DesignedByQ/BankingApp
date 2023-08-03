@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const dates = new Date()
+//const dates = new Date()
 
 const PDFDocument = ({ account, user }) => {
   return (
@@ -32,9 +32,9 @@ const PDFDocument = ({ account, user }) => {
             ${user.addressDTO.county}, ${user.addressDTO.postCode},
             ${user.addressDTO.country}`}</Text>
         </View>
-        <View>
+        {/* <View>
             <Text>Your account summary upto: {dates}</Text>
-        </View>
+        </View> */}
 
         {account[4]
           .slice()

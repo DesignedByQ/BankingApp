@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EditCust() {
 
@@ -215,107 +217,118 @@ function EditCust() {
     }
 
   return (
-    <div>
-        <h2>Enter the customer ID below: </h2>
-        <div>
-            <label htmlFor='userId'>Search Customer By ID: </label>
-            <input type='number' placeholder='Enter Customer ID'  name='userId' value={userId} onChange={(e) => setUserId(e.target.value)} />
-        </div>
-        <div>
-            <button type='button' onClick={handleGetCust}>Find Customer</button>
-        </div>
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px', paddingBottom: '20px' }}>
+        <header className="App-header">
+            <Container className='bg-primary'>
+                <div style={{ paddingTop: '1px' }}>
+                    <h2 className='mt-2'>Enter the customer ID below: </h2>
+                </div>
+                <div>
+                    <label htmlFor='userId'><h5>Search Customer By ID: </h5></label>
+                    <input className='mx-3 my-3' type='number' placeholder='Enter Customer ID'  name='userId' value={userId} onChange={(e) => setUserId(e.target.value)} />
+                </div>
+                <div>
+                    <Button className='my-3 bg-info' type='button' onClick={handleGetCust}>Find Customer</Button>
+                </div>
+            </Container>
+            
+            <Container className='my-3 bg-primary'>
+            <div style={{ paddingTop: '1px' }} >
+                {customer && (
+                    
+                <Form onSubmit={handleFormSubmit} >
+                    <h2 className='mt-2'>Enter the fields you would like to change below: </h2>
+                    <h6>Personal Details</h6>
+                    <Form.Group controlId="formEdit">
 
-        
-        <div>
-            {customer && (
+                    <div style={{ width: '300px' }}>
+                        <Form.Label htmlFor='firstName'>First Name: </Form.Label>
+                        <Form.Control className='mb-2' type='text' placeholder={customer.firstName} name='firstName' value={values.firstName} onChange={(e) => setValues({ ...values, firstName: e.target.value })}/>  
+                    </div>
+
+                    <div style={{ width: '300px' }}>
+                        <Form.Label htmlFor='lastName'>Last Name: </Form.Label>
+                        <Form.Control className='mb-2' type='text' placeholder={customer.lastName} name='lastName' value={values.lastName} onChange={(e) => setValues({ ...values, lastName: e.target.value })}/>  
+                    </div>
+
+                    <div style={{ width: '300px' }}>
+                        <Form.Label htmlFor='middleName'>Middle Name: </Form.Label>
+                        <Form.Control className='mb-2' type='text' placeholder={customer.middleName} name='middleName' value={values.middleName} onChange={(e) => setValues({ ...values, middleName: e.target.value })}/>  
+                    </div>
+
+                    <div style={{ width: '300px' }}>
+                        <Form.Label htmlFor='mobile'>Mobile: </Form.Label>
+                        <Form.Control className='mb-2' type='number' placeholder={customer.mobile} name='mobile' value={values.mobile} onChange={(e) => setValues({ ...values, mobile: e.target.value })}/>  
+                    </div>
+
+                    <div style={{ width: '300px' }}>
+                        <Form.Label htmlFor='email'>Email: </Form.Label>
+                        <Form.Control className='mb-2' type='email' placeholder={customer.email} name='email' value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })}/>  
+                    </div>
+
+                    <div>
+                        <h6>Address</h6>
+                     
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.buildingNo'>Building No.: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.buildingNo} name='addressDTO.buildingNo' value={values.addressDTO.buildingNo} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, buildingNo: e.target.value }})}/>  
+                        </div>
+
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.firstLine'>First Line: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.firstLine} name='addressDTO.firstLine' value={values.addressDTO.firstLine} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, firstLine: e.target.value }})}/>  
+                        </div>
+
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.secondLine'>Second Line: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.secondLine} name='addressDTO.secondLine' value={values.addressDTO.secondLine} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, secondLine: e.target.value }})}/>  
+                        </div>
+     
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.city'>City: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.city} name='addressDTO.city' value={values.addressDTO.city} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, city: e.target.value }})}/>  
+                        </div>
+      
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.county'>County: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.county} name='addressDTO.county' value={values.addressDTO.county} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, county: e.target.value }})}/>  
+                        </div>
+             
+                        <div style={{ width: '300px' }}>
+                            <Form.Label htmlFor='addressDTO.postCode'>Post Code: </Form.Label>
+                            <Form.Control className='mb-2' type='text' placeholder={customer.addressDTO.postCode} name='addressDTO.postCode' value={values.addressDTO.postCode} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, postCode: e.target.value }})}/>  
+                        </div>
+
+                    </div>
+
+                    <small className='my-1'>{isEditSuccessful && "Customer details have been successfully updated!"}</small>
+                    <div>
+                        <Button type='submit' className='my-3 bg-info'>Edit Customer</Button>
+                    </div>
+                    </Form.Group>
+
+                    <h2>Customer Accounts: </h2>
                 
-            <form onSubmit={handleFormSubmit}>
-                <h2>Enter the fields you would like to change below: </h2>
-
-                <div>
-                    <label htmlFor='firstName'>First Name: </label>
-                    <input type='text' placeholder={customer.firstName} name='firstName' value={values.firstName} onChange={(e) => setValues({ ...values, firstName: e.target.value })}  />
-                </div>
-
-                <div>
-                    <label htmlFor='lastName'>Last Name: </label>
-                    <input type='text' placeholder={customer.lastName} name='lastName' value={values.lastName} onChange={(e) => setValues({ ...values, lastName: e.target.value })}  />
-                </div>
-
-                <div>
-                    <label htmlFor='middleName'>Middle Name: </label>
-                    <input type='text' placeholder={customer.middleName} name='middleName' value={values.middleName} onChange={(e) => setValues({ ...values, middleName: e.target.value })}  />
-                </div>
-
-                <div>
-                    <label htmlFor='mobile'>Mobile: </label>
-                    <input type='number' placeholder={customer.mobile} name='mobile' value={values.mobile} onChange={(e) => setValues({ ...values, mobile: e.target.value })}  />
-                </div>
-
-                <div>
-                    <label htmlFor='email'>Email: </label>
-                    <input type='email' placeholder={customer.email} name='email' value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })}  />
-                </div>
-
-                <div>
-                    <div>
-                        <label htmlFor='addressDTO.buildingNo'>Building No.: </label>
-                        <input type='text' placeholder={customer.addressDTO.buildingNo} name='addressDTO.buildingNo' value={values.addressDTO.buildingNo} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, buildingNo: e.target.value }})}  />
+                    {customer.accounts.map((account, index) => (
+                    <div key={index}>
+                        <h5>Account Type: {account[2].toUpperCase()}</h5>
+                        <h5>Account Number: {account[0]}</h5>
+                        <h5>Account Sort Code: {account[1]}</h5>
+                        <h5>Account Balance: {account[3]}</h5>
+                        <small>{deletedAccounts.includes(account[0]) && `Account ${account[0]} was deleted successfully!`}</small>
+                        {!deletedAccounts.includes(account[0]) && (
+                            <Button type='button' className='my-3 bg-info' onClick={() => closeAccount(account[0])}>Close Account</Button>
+                        )}
                     </div>
+                    ))}
 
-                    <div>
-                        <label htmlFor='addressDTO.firstLine'>First Line: </label>
-                        <input type='text' placeholder={customer.addressDTO.firstLine} name='addressDTO.firstLine' value={values.addressDTO.firstLine} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, firstLine: e.target.value }})}  />
-                    </div>
+                </Form>
 
-                    <div>
-                        <label htmlFor='addressDTO.secondLine'>Second Line: </label>
-                        <input type='text' placeholder={customer.addressDTO.secondLine} name='addressDTO.secondLine' value={values.addressDTO.secondLine} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, secondLine: e.target.value }})}  />
-                    </div>
-
-                    <div>
-                        <label htmlFor='addressDTO.city'>City: </label>
-                        <input type='text' placeholder={customer.addressDTO.city} name='addressDTO.city' value={values.addressDTO.city} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, city: e.target.value }})}  />
-                    </div>
-
-                    <div>
-                        <label htmlFor='addressDTO.county'>County: </label>
-                        <input type='text' placeholder={customer.addressDTO.county} name='addressDTO.county' value={values.addressDTO.county} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, county: e.target.value }})}  />
-                    </div>
-
-                    <div>
-                        <label htmlFor='addressDTO.postCode'>Post Code: </label>
-                        <input type='text' placeholder={customer.addressDTO.postCode} name='addressDTO.postCode' value={values.addressDTO.postCode} onChange={(e) => setValues({ ...values, addressDTO: { ...values.addressDTO, postCode: e.target.value }})}  />
-                    </div>
-                </div>
-                <small>{isEditSuccessful && "Customer details have been successfully updated!"}</small>
-                <div>
-                    <button type='submit'>Edit Customer</button>
-                </div>
-
-                <h2>Customer accounts: </h2>
-              
-                {customer.accounts.map((account, index) => (
-                <div key={index}>
-                    <h3>Account Type: {account[2]}</h3>
-                    <h3>Account Number: {account[0]}</h3>
-                    <h3>Account Sort Code: {account[1]}</h3>
-                    <h3>Account Balance: {account[3]}</h3>
-                    <small>{deletedAccounts.includes(account[0]) && `Account ${account[0]} was deleted successfully!`}</small>
-                    {!deletedAccounts.includes(account[0]) && (
-                        <button type='button' onClick={() => closeAccount(account[0])}>Close Account</button>
-                    )}
-                </div>
-                ))}
-
-            </form>
-
-            )}
-        </div>
-        
+                )}
+            </div>
+            </Container>
+        </header>
     </div>
-
-    
   )
 }
 

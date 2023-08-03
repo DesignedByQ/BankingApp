@@ -2,6 +2,8 @@ import React from 'react'
 import Validation from './SignupValidation';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, Form, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Signup() {
 
@@ -146,140 +148,199 @@ function Signup() {
         };
     
   return (
-    <div className="">
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px', paddingBottom: '20px' }}>
+        <header className='App-header'>
         <div>
         {isLoading && <h2>Submitting details...</h2>}
         {isError && <h2>There has been an error with submitting your details, please try again later</h2>}
-        <h2>Sign-Up</h2>
+        <Container className='bg-primary text-black d-flex justify-content-center'>
+            <h2>Sign-Up</h2>
+        </Container>
 
+        <Container className='bg-primary my-3'>
             <h2>Enter your details for your new account.</h2>
-            <form action="" onSubmit={handleSubmit}>
-                <div>
+            <Form onSubmit={handleSubmit}>
+                <div style={{ border: '1px solid', borderRadius: '10px', padding: '10px' }}>
                     <fieldset>
                         <legend>Select which account you would like to open:</legend>
                         {errors.account && <span>{errors.account}</span>}
                         <div>
-                            <input type="radio" id="current" name="account" value="current" checked={values.account === "current"} onChange={handleInput}/>
+                            <input className='mx-3' type="radio" id="current" name="account" value="current" checked={values.account === "current"} onChange={handleInput}/>
                             <label htmlFor="current">Current Account</label>
                         </div>
 
                         <div>
-                            <input type="radio" id="savings" name="account" value="savings" checked={values.account === "savings"} onChange={handleInput}/>
+                            <input className='mx-3' type="radio" id="savings" name="account" value="savings" checked={values.account === "savings"} onChange={handleInput}/>
                             <label htmlFor="savings">Savings Account</label>
                         </div>
 
                         <div>
-                            <input type="radio" id="creditcard" name="account" value="creditcard" checked={values.account === "creditcard"} onChange={handleInput}/>
+                            <input className='mx-3' type="radio" id="creditcard" name="account" value="creditcard" checked={values.account === "creditcard"} onChange={handleInput}/>
                             <label htmlFor="creditcard">Credit Card</label>
                         </div>
                     </fieldset>
                 </div>
-                <div>
+                <div className='my-3'>
                     <small>Please insure all details provided match the identification document provided.</small>
                 </div>
-                <div>
-                    <label htmlFor="username">User Name</label>
-                    <input type="text" placeholder="Enter Username" name="username" 
-                    onChange={handleInput} />
-                    {errors.username && <span>{errors.username}</span>}
-                </div>
-                <div>
-                    <label htmlFor="firstname">First Name</label>
-                    <input type="text" placeholder="Enter First Name" name="firstname" 
-                    onChange={handleInput} />
-                    {errors.firstname && <span>{errors.firstname}</span>}
-                </div>
-                <div>
-                    <label htmlFor="middlename">Middle Name</label>
-                    <input type="text" placeholder="Enter Middle Name" name="middlename" 
-                    onChange={handleInput} />
-                    {errors.middlename && <span>{errors.middlename}</span>}
-                </div>
-                <div>
-                    <label htmlFor="lastname">Last Name</label>
-                    <input type="text" placeholder="Enter Last Name" name="lastname" 
-                    onChange={handleInput} />
-                    {errors.lastname && <span>{errors.lastname}</span>}
-                </div>
-                <div>
-                    <label htmlFor="dob">Date of Birth</label>
-                    <input type="date" placeholder="Enter Last Name" name="dob" 
-                    onChange={handleInput} />
-                    {errors.dob && <span>{errors.dob}</span>}
-                </div>
-                <div>
-                    <label htmlFor="mobile">Mobile</label>
-                    <input type="text" placeholder="Enter Mobile Number" name="mobile" 
-                    onChange={handleInput} />
-                    {errors.mobile && <span>{errors.mobile}</span>}
-                </div>
-                <div>
-                    <label htmlFor="addressDTO.buildingNo">Building No.</label>
-                    <input type="text" placeholder="Enter Building Number" name="addressDTO.buildingNo" 
-                    onChange={handleInput} />
-                    {errors.buildingNo && <span>{errors.buildingNo}</span>}
 
-                    <label htmlFor="addressDTO.firstLine">First Line</label>
-                    <input type="text" placeholder="Enter First Line" name="addressDTO.firstLine" 
+                <h3>Personal Details</h3>
+                
+        
+                <Form.Group controlId='formPersonal' style={{ border: '1px solid', borderRadius: '10px', padding: '10px' }}>
+                <Row>
+                <Col>
+                <h5>Customer</h5>  
+                <div className='my-2'>
+                    <Form.Label htmlFor="username">User Name</Form.Label>
+                    
+                    <Form.Control type="text" placeholder="Enter Username" name="username" 
                     onChange={handleInput} />
-                    {errors.firstLine && <span>{errors.firstLine}</span>}
+                    <Form.Text>
+                        {errors.username && <span>{errors.username}</span>}
+                    </Form.Text>
+                </div>
+                <div className='my-2'>
+                    <Form.Label htmlFor="firstname">First Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter First Name" name="firstname" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.firstname && <span>{errors.firstname}</span>}
+                    </Form.Text>
+                </div>
+                <div className='my-2'>
+                    <Form.Label htmlFor="middlename">Middle Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Middle Name" name="middlename" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.middlename && <span>{errors.middlename}</span>}
+                    </Form.Text>
+                </div>
+                <div className='my-2'>
+                    <Form.Label htmlFor="lastname">Last Name</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Last Name" name="lastname" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.lastname && <span>{errors.lastname}</span>}
+                    </Form.Text>
+                </div>
+                <div className='my-2'>
+                    <Form.Label htmlFor="dob">Date of Birth</Form.Label>
+                    <Form.Control type="date" placeholder="Enter Last Name" name="dob" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.dob && <span>{errors.dob}</span>}
+                    </Form.Text>
+                </div>
+                <div className='my-2'>
+                    <Form.Label htmlFor="mobile">Mobile</Form.Label>
+                    <Form.Control type="text" placeholder="Enter Mobile Number" name="mobile" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.mobile && <span>{errors.mobile}</span>}
+                    </Form.Text>
+                </div>
+                </Col>
 
-                    <label htmlFor="addressDTO.secondLine">Second Line</label>
-                    <input type="text" placeholder="Enter Second Line" name="addressDTO.secondLine" 
+                <Col>         
+                <h5>Address</h5>      
+                
+                <div className='my-2'>
+                    <Form.Label htmlFor="addressDTO.buildingNo">Building No.</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter Building Number" name="addressDTO.buildingNo" 
                     onChange={handleInput} />
-                    {errors.secondLine && <span>{errors.secondLine}</span>}
+                    <Form.Text>
+                        {errors.buildingNo && <span>{errors.buildingNo}</span>}
+                    </Form.Text>
 
-                    <label htmlFor="addressDTO.city">City</label>
-                    <input type="text" placeholder="Enter City" name="addressDTO.city" 
+                    <Form.Label htmlFor="addressDTO.firstLine">First Line</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter First Line" name="addressDTO.firstLine" 
                     onChange={handleInput} />
-                    {errors.city && <span>{errors.city}</span>}
+                    <Form.Text>
+                        {errors.firstLine && <span>{errors.firstLine}</span>}
+                    </Form.Text>
 
-                    <label htmlFor="addressDTO.county">County</label>
-                    <input type="text" placeholder="Enter County" name="addressDTO.county" 
-                    onChange={handleInput} />
-                    {errors.county && <span>{errors.county}</span>}
 
-                    <label htmlFor="addressDTO.postCode">Post Code</label>
-                    <input type="text" placeholder="Enter Post Code" name="addressDTO.postCode" 
+                    <Form.Label htmlFor="addressDTO.secondLine">Second Line</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter Second Line" name="addressDTO.secondLine" 
                     onChange={handleInput} />
-                    {errors.postCode && <span>{errors.postCode}</span>}
+                    <Form.Text>
+                        {errors.secondLine && <span>{errors.secondLine}</span>}
+                    </Form.Text>
+
+                    <Form.Label htmlFor="addressDTO.city">City</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter City" name="addressDTO.city" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.city && <span>{errors.city}</span>}
+                    </Form.Text>
+
+                    <Form.Label htmlFor="addressDTO.county">County</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter County" name="addressDTO.county" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.county && <span>{errors.county}</span>}
+                    </Form.Text>
+
+
+                    <Form.Label htmlFor="addressDTO.postCode">Post Code</Form.Label>
+                    <Form.Control className='mb-2' type="text" placeholder="Enter Post Code" name="addressDTO.postCode" 
+                    onChange={handleInput} />
+                    <Form.Text>
+                        {errors.postCode && <span>{errors.postCode}</span>}
+                    </Form.Text>
 
                     {/* <label htmlFor="country">Country</label>
                     <input type="text" placeholder="Enter Country" name="country" 
                     onChange={handleInput} />
                     {errors.country && <span>{errors.country}</span>} */}
                 </div>
-                <div>
-                <h3>Proof of ID</h3>
-                <small>As part of your application we require you to submit one form of government issued ID</small>
-                {errors.fileDTO && <span>{errors.fileDTO}</span>}
-                <div>
-                    <label htmlFor="fileDTO.fileData">Identification Document</label>
-                    <input type='file' name='fileDTO.fileData' onChange={handleInput} />
+                </Col>
+                </Row>
+                </Form.Group>
+
+                <h3 className='my-3'>Proof of ID</h3>
+                <div style={{ border: '1px solid', borderRadius: '10px', padding: '10px' }}>
+                    
+                    <small>As part of your application we require you to submit one form of government issued ID</small>
+                    {errors.fileDTO && <span>{errors.fileDTO}</span>}
+                    <div className='my-3'>
+                        <label htmlFor="fileDTO.fileData">Identification Document:</label>
+                        <input className='mx-3' type='file' name='fileDTO.fileData' onChange={handleInput} />
+                    </div>
+                    
+                    <small>File format must be 1MB max and either PDF, JPG, PNG only.</small>
+                    
                 </div>
-                
-                <small>File format must be 1MB max and either PDF, JPG, PNG only.</small>
-                
-                </div>
-                <div>
-                    <h3>New Login Details</h3>
+
+                <h3 className='my-3'>New Login Details</h3>
+                <div  style={{ border: '1px solid', borderRadius: '10px', padding: '10px' }}>
+                    
                     <div>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" placeholder="Enter Email" name="email" 
-                        onChange={handleInput} />
-                        {errors.email && <span>{errors.email}</span>}
+                        <Form.Label htmlFor="email">Email</Form.Label>
+                        <Form.Control className='mb-2' type="email" placeholder="Enter Email" name="email" 
+                        onChange={handleInput} style={{ width: '400px' }}/>
+
+                        <Form.Text>
+                            {errors.email && <span>{errors.email}</span>}
+                        </Form.Text>
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" placeholder="Enter Password" name="password" 
-                        onChange={handleInput} />
-                        {errors.password && <span>{errors.password}</span>}
+                        <Form.Label htmlFor="password">Password</Form.Label>
+                        <Form.Control className='mb-2' type="password" placeholder="Enter Password" name="password" 
+                        onChange={handleInput} style={{ width: '400px' }}/>
+                        
+                        <Form.Text>
+                            {errors.password && <span>{errors.password}</span>}
+                        </Form.Text>
 
-                        <label htmlFor="confirmpassword">Confirm Your Password</label>
-                        <input type="password" placeholder="Enter Password Again" name="confirmpassword" 
-                        onChange={handleInput} />
-                        {errors.confirmpassword && <span>{errors.confirmpassword}</span>}
+                        <Form.Label htmlFor="confirmpassword">Confirm Your Password</Form.Label>
+                        <Form.Control className='mb-2' type="password" placeholder="Enter Password Again" name="confirmpassword" 
+                        onChange={handleInput} style={{ width: '400px' }}/>
 
+                        <Form.Text>
+                            {errors.confirmpassword && <span>{errors.confirmpassword}</span>}
+                        </Form.Text>
                         
                         <div>
                             <small>Password must include one capital letter, 3 numbers and be at least 11 characters long.</small>
@@ -287,10 +348,12 @@ function Signup() {
                     </div>
                 </div>
 
-                <button type="submit" className="">SIGN UP</button>
+                <Button type="submit" className="bg-info my-3">SIGN UP</Button>
 
-            </form>
+            </Form>
+            </Container>
         </div>
+        </header>
     </div>
 );
   

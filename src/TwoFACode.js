@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import CodeValidation from './TwoFACodeVerification';
 import { Link, useLocation,  useNavigate } from 'react-router-dom';
+import { Button, Container, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function TwoFACode() {
 
@@ -95,28 +97,36 @@ function TwoFACode() {
   }, [admin_url, email, url, location.state, errors.code, navigate]);
 
   return (
-    <div className="">
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px', paddingBottom: '20px'  }}> 
+      <header className='App-header'>
+        <Container className='bg-primary d-flex justify-content-center'>
       <div>
         {isLoading && <h2>Code verification successful! Logging in to user profile...</h2>}
         {isError && <h2>The code provided could not be verified</h2>}
-        <h2>CODE VERIFICATION</h2>
-        <form action="" onSubmit={handleSubmit}>
+        <h2 className='my-3'>CODE VERIFICATION</h2>
+        <Form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="code">Code</label>
-            <input
+            <Form.Group controlId='formCode'>
+              <Form.Label className='d-flex justify-content-center' htmlFor="code">Code: </Form.Label>
+              <Form.Control 
+            
               type="number"
               placeholder="Enter Code"
               name="code"
               onChange={handleInput}
             />
-            {errors.code && <span>{errors.code}</span>}
+            <Form.Text>{errors.code && <span>{errors.code}</span>}</Form.Text>
+            
+            </Form.Group>
           </div>
         
-          <button type="submit" className="">SUBMIT CODE</button>
-          <button type="submit" className=""><Link to="/" className="">HOMEPAGE</Link></button>
+          <Button type="submit" className="my-3 mx-3 bg-info">SUBMIT CODE</Button>
+          <Button className="my-3 mx-3 bg-info" type="submit" ><Link to="/" className="">HOMEPAGE</Link></Button>
 
-        </form>
+        </Form>
       </div>
+      </Container>
+      </header>
     </div>
   );
 }

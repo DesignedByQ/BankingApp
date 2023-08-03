@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 //import { saveAs } from 'file-saver';
-import {PDFDownloadLink} from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFDocument from './PDFDocument';
 import Text from './Text';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CustProfile() {
   const navigate = useNavigate();
@@ -429,72 +431,79 @@ const openAccount = async () => {
 
   return (
     
-    <div>
-      
+    <div className="App" style={{ minHeight: '100vh', backgroundColor: "black", paddingTop: '20px', paddingBottom: '20px' }}>
+      <header className='App-header'>
       {user && (
         <div>
-          <h2>Welcome to your customer portal</h2>
-          <h3>Username: {user.authUserDTO.username}</h3>
-          <h3>First Name: {user.firstName}</h3>
-          <h3>Middle Name: {user.middleName}</h3>
-          <h3>Last Name: {user.lastName}</h3>
-          <h3>Mobile: {user.mobile}</h3>
-          <h3>Email: {user.email}</h3>
-          <h3>
-            Address: {`${user.addressDTO.buildingNo}, ${user.addressDTO.firstLine},
-            ${user.addressDTO.secondLine}, ${user.addressDTO.city},
-            ${user.addressDTO.county}, ${user.addressDTO.postCode},
-            ${user.addressDTO.country}`}
-          </h3>
+          <Container className='bg-primary'>
+            <div className="mb-3 text-black d-flex justify-content-center">
+              <h1>Welcome to your customer portal</h1>
+            </div>
+            <h3>Username: {user.authUserDTO.username.toUpperCase()}</h3>
+            <h3>First Name: {user.firstName}</h3>
+            <h3>Middle Name: {user.middleName}</h3>
+            <h3>Last Name: {user.lastName}</h3>
+            <h3>Mobile: {user.mobile}</h3>
+            <h3>Email: {user.email}</h3>
+            <h3>
+              Address: {`${user.addressDTO.buildingNo}, ${user.addressDTO.firstLine},
+              ${user.addressDTO.secondLine}, ${user.addressDTO.city},
+              ${user.addressDTO.county}, ${user.addressDTO.postCode},
+              ${user.addressDTO.country}`}
+            </h3>
 
-          <div><button type='button' onClick={getLog}>Login History</button></div>
+            <div><Button  className='mt-3 bg-info' type='button' onClick={getLog}>Login History</Button></div>
 
-          <div><button type='button' onClick={openAccount}>Open Account</button></div>
+            <div><Button  className='my-3 bg-info' type='button' onClick={openAccount}>Open Account</Button></div>
+          </Container>
 
-          <h2>List of accounts</h2>
+          <Container className='bg-primary my-3'>
+            <h1 className="text-black d-flex justify-content-center">List of accounts</h1>
 
-          <hr></hr>
+            <hr></hr>
 
-          {user.accounts.map((account, index) => (
-            <div key={index}>
-              <h3>{account[2]}</h3>
-              <h3>Account Number: {account[0]}</h3>
-              <h3>Account Sort Code: {account[1]}</h3>
-              <h3>Account Balance: {account[3]}</h3>
+            {user.accounts.map((account, index) => (
+              <div key={index}>
+                <h3>Account Type: {account[2].toUpperCase()}</h3>
+                <h3>Account Number: {account[0]}</h3>
+                <h3>Account Sort Code: {account[1]}</h3>
+                <h3>Account Balance: {account[3]}</h3>
 
-              <button type='button' onClick={() => viewTransactionsShow(index)}>Show Transactions</button>
+                <Button className='bg-info my-3' type='button' onClick={() => viewTransactionsShow(index)}>Show Transactions</Button>
 
-              {selectedAccount === index && (
-                <button type='button' onClick={viewTransactionsHide}>Hide Transactions</button>
-              )}
+                {selectedAccount === index && (
+                  <Button className='bg-info my-3' type='button' onClick={viewTransactionsHide}>Hide Transactions</Button>
+                )}
 
-              <button type='button' onClick={() => makeIntTransferShow(index)}>Internal Transfers</button>
+                <Button className='bg-info my-3' type='Button' onClick={() => makeIntTransferShow(index)}>Internal Transfers</Button>
 
-              <button type='button' onClick={() => makeExtTransferShow(index)}>External Transfers</button>
+                <Button className='bg-info my-3' type='Button' onClick={() => makeExtTransferShow(index)}>External Transfers</Button>
 
-              {selectedAccount === index && (
-                <div>
-                  <ul>
-                    {account[4]
-                    .slice()
-                    .sort((a, b) => a.transLogId - b.transLogId)
-                    .map((transLog, logIndex) => (
+                {selectedAccount === index && (
+                  <div>
+                    <ul>
+                      {account[4]
+                      .slice()
+                      .sort((a, b) => a.transLogId - b.transLogId)
+                      .map((transLog, logIndex) => (
 
-                      <li key={logIndex}>
-                        ID: {transLog.transLogId} | Date: {transLog.date} | Previous Balance: {transLog.oldBal} | From Account: {transLog.from} | Amount: {transLog.amount} | Reference: {transLog.reference} | New Balance: {transLog.newBal} | To Account: {transLog.to}
-                        <Text> ... </Text>
-                        <p></p>
-                      </li>
-                      
-                    ))}
-                  
-                  </ul>
-                  {/* <button onClick={handleDownload}>Download Transactions</button> */}
-                  <button><PDFDownloadLink document={<PDFDocument account={user.accounts[selectedAccount]} user={user} />} fileName="account_transactions.pdf">
-                    {({ blob, url, loading, error }) => (loading ? 'Loading...' : 'Download Transactions as PDF')}
-                  </PDFDownloadLink></button>
-                </div>
-              )}
+                        <li key={logIndex}>
+                          ID: {transLog.transLogId} | Date: {transLog.date} | Previous Balance: {transLog.oldBal} | From Account: {transLog.from} | Amount: {transLog.amount} | Reference: {transLog.reference} | New Balance: {transLog.newBal} | To Account: {transLog.to}
+                          <Text> ... </Text>
+                          <p></p>
+                        </li>
+                        
+                      ))}
+                    
+                    </ul>
+                    {/* <button onClick={handleDownload}>Download Transactions</button> */}
+                    <Button className='bg-info'><PDFDownloadLink document={<PDFDocument account={user.accounts[selectedAccount]} user={user} />} fileName="account_transactions.pdf">
+                      {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download Transactions as PDF')}
+                    </PDFDownloadLink></Button>
+                  </div>
+                )}
+
+                        
 
             {accountTransfersInt === index && ( 
                 <form onSubmit={handleSubmitInt}>
@@ -528,8 +537,6 @@ const openAccount = async () => {
               
               </form>
             )}
-
-
 
             {accountTransfersExt === index && ( 
                       <form onSubmit={handleSubmitExt}>
@@ -579,18 +586,16 @@ const openAccount = async () => {
             </div>
           ))}  
     
-        
+        </Container>
         </div>
         
       )}
 
+      <Container className="bg-primary my-3 d-flex justify-content-center">        
+        <Button className="bg-info my-2" type="submit"><Link to="/" className="">LOG OUT</Link></Button>
+      </Container>
 
-
-      <button type="submit">
-        <Link to="/" className="">
-          LOG OUT
-        </Link>
-      </button>
+      </header>
     </div>
   );
 }

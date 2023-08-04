@@ -55,10 +55,10 @@ Instructions for this project were to create a banking app with the following cr
 
 ### TECHNOLOGY
 
-Database: MySQL
-Back-End: Spring Boot / Java
-Front-End: React
-End Points: Postman
+- Database: MySQL
+- Back-End: Spring Boot / Java
+- Front-End: React
+- End Points: Postman
 
 ### HOW TO USE THE APP
 

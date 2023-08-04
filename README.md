@@ -19,7 +19,7 @@ This project is made up of the following microservices:
 5. 
 6. [ERD](#ENTITY-RELATIONSHIP-DIAGRAM)
 7. [TECH USED & CICD PIPELINE](#TECHNOLOGY)
-8. [TESTING](#TESTING)
+8. 
 9. [HOW TO USE THE APP](#HOW-TO-USE-THE-APP)
 10. [KNOWN ISSUES](#KNOWN-ISSUES)
 11. [FUTURE IMPROVEMENTS](#FUTURE-IMPROVEMENTS)
@@ -55,8 +55,33 @@ Instructions for this project were to create a banking app with the following cr
 
 ### ENTITY RELATIONSHIP DIAGRAM
 
-![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/c848a455-9226-4157-9db0-04aa3e6ccaa0)
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/6ebadc46-e683-49ab-a1df-c444254e0559)
 
+### TECHNOLOGY
 
+Database - MySQL
+Back-End - Spring Boot / Java
+Front-End - React
+End Points - Postman
 
+### HOW TO USE THE APP
+
+Customer Journey
+
+This is the path of a new customer who would like to open up a new account with Infosys Bank.
+
+Home Page
+
+- The user will click the ‘Start Application’ button to begin the process.
+
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/1a150833-dec8-4da7-9232-7af9498f5558)
+
+Account Application
+(Project brief criteria: 10. Upload address proof, ID proof)
+New customers can:
+•	Select account type.
+•	Provide personal details.
+•	Upload an indentification document.
+•	Confirm future login credentials.
+•	Once the application details have been entered the user can submit them using the ‘Sign Up’ button.
 

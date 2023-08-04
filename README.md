@@ -70,18 +70,35 @@ Customer Journey
 
 This is the path of a new customer who would like to open up a new account with Infosys Bank.
 
-Home Page
+#### Home Page
 
 - The user will click the ‘Start Application’ button to begin the process.
 
 ![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/1a150833-dec8-4da7-9232-7af9498f5558)
 
 Account Application
+
 (Project brief criteria: 10. Upload address proof, ID proof)
+
 New customers can:
-•	Select account type.
-•	Provide personal details.
-•	Upload an indentification document.
-•	Confirm future login credentials.
-•	Once the application details have been entered the user can submit them using the ‘Sign Up’ button.
+
+-	Select account type.
+-	Provide personal details.
+-	Upload an indentification document.
+-	Confirm future login credentials.
+-	Once the application details have been entered the user can submit them using the ‘Sign Up’ button.
+
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/6eeef4b2-384b-4354-ae0f-8e1fcf412384)
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/38c20ce0-faf6-4e80-8ae9-96da542a2362)
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/951f86af-5191-430e-a9d3-37b326a2aa33)
+
+Account Submitted
+
+- This page displays a confirmation of the details submitted by the new  customer with instructions of what to next expect. The details provided will be used to create an account and customer proifle if an admin user verifies it.
+
+
+
+
+
+
 

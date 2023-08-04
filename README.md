@@ -16,7 +16,7 @@ This project is made up of the following microservices:
 2. [BRIEF & ADDITIONAL REQUIREMENTS](#BRIEF)
 3. [MY APPROACH](#MY-APPROACH)
 4. [RISK ASSESSMENT](#RISK-ASSESSMENT)
-5. [JIRA BREAKDOWN](#JIRA)
+5. 
 6. [ERD](#ENTITY-RELATIONSHIP-DIAGRAM)
 7. [TECH USED & CICD PIPELINE](#TECHNOLOGY)
 8. [TESTING](#TESTING)
@@ -44,6 +44,19 @@ Instructions for this project were to create a banking app with the following cr
 8. Generate Statement
 9. Audit log of login/events
 10. Upload address proof, ID proof
+
+### MY APPROACH
+
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/d00ae1b3-afbc-48ec-a7fc-084f0551f67c)
+
+### RISK ASSESSMENT
+
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/13688fc6-141d-4d0c-ae94-222fef097c72)
+
+### ENTITY RELATIONSHIP DIAGRAM
+
+![image](https://github.com/DesignedByQ/BankingApp/assets/32695213/c848a455-9226-4157-9db0-04aa3e6ccaa0)
+
 
 
 
